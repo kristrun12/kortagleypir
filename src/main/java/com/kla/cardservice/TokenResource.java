@@ -32,7 +32,24 @@ public class TokenResource{
 		tokens.add(UUID.randomUUID().toString());
 		tokens.add(UUID.randomUUID().toString());
 		tokens.add(UUID.randomUUID().toString());
+	
 		return tokens;
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getlast")
+	public List<String> getbull()
+	{
+		List<String> tokens = new ArrayList<String>();
+		tokens.add(UUID.randomUUID().toString());
+		tokens.add(UUID.randomUUID().toString());
+		tokens.add(UUID.randomUUID().toString());
+		tokens.add(UUID.randomUUID().toString());
+		tokens.add(UUID.randomUUID().toString());
+		tokens.add(UUID.randomUUID().toString());
+		tokens.add(UUID.randomUUID().toString());
+	
+		return tokens;
+	}
 }
