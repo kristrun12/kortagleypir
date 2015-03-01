@@ -1,0 +1,1 @@
+web: java -cp target/classes:target/dependency/* com.kla.cardservice.heroku.Main
