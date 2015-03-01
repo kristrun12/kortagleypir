@@ -10,7 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/token")
-public class TokenResource extends BaseResource{
+public class TokenResource{
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)

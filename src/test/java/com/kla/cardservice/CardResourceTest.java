@@ -15,6 +15,8 @@ import com.kla.cardservice.data.Card;
 
 public class CardResourceTest extends JerseyTest {
 
+	
+	
     @Override
     protected Application configure() {
         return new ResourceConfig(CardResource.class);
@@ -30,6 +32,11 @@ public class CardResourceTest extends JerseyTest {
         assertTrue(responseMsg.contains("123"));
     }
     
+    @Test
+    public void testGetCard() {
+        final String responseMsg = target().path("card").request().get(String.class);
+        assertTrue(responseMsg.contains("Hi"));
+    } 
 
     /**
      * Test to see that the message "Got it!" is sent in the response.

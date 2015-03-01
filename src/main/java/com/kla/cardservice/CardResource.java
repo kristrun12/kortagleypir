@@ -1,7 +1,5 @@
 package com.kla.cardservice;
 
-import java.util.UUID;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -13,12 +11,15 @@ import javax.ws.rs.core.MediaType;
 import com.kla.cardservice.data.Card;
 
 @Path("/card")
-public class CardResource extends BaseResource{
+public class CardResource {
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayHi()
 	{
+
+		//createDatabase();
+
 		return "Hi Token!";
 	}
 
@@ -38,7 +39,8 @@ public class CardResource extends BaseResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	public String createCard(Card newCard)
 	{
-		System.out.println("createcard");
+		//int cardId = new CardDAO().saveCard(newCard);
+		//System.out.println(cardId);
 		System.out.println(newCard.getCardHolderName());
 		return newCard.getCardNumber();
 	}
