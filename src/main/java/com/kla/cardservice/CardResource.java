@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import com.kla.cardservice.data.Card;
 
 @Path("/card")
-public class CardResource {
+public class CardResource extends BaseResource{
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
