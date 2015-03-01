@@ -2,12 +2,16 @@ package com.kla.cardservice;
 
 import static org.junit.Assert.assertTrue;
 
-
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
+
+import com.kla.cardservice.data.Card;
 
 public class CardResourceTest extends JerseyTest {
 
@@ -25,4 +29,22 @@ public class CardResourceTest extends JerseyTest {
 
         assertTrue(responseMsg.contains("123"));
     }
+    
+
+    /**
+     * Test to see that the message "Got it!" is sent in the response.
+     */
+    @Test
+    public void testPost() {
+    	Card newCard = new Card();
+    	newCard.setCardHolderName("Palli sig");
+    	newCard.setCardNumber("123123123");
+    	
+    	
+        final Response responseMsg = target().path("card").request().post(Entity.entity(newCard, MediaType.APPLICATION_JSON));
+        
+        System.out.println(responseMsg.getClass().getName());
+        System.out.println(responseMsg);
+    }
+    
 }
