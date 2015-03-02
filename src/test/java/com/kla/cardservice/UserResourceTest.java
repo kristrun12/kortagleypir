@@ -11,6 +11,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
 
+
 import com.kla.cardservice.data.User;
 
 public class UserResourceTest extends JerseyTest {
@@ -19,9 +20,13 @@ public class UserResourceTest extends JerseyTest {
 	
     @Override
     protected Application configure() {
+    	
+    	
         return new ResourceConfig(UserResource.class);
     }
 
+    
+    
     /**
      * Test to see that the message "Got it!" is sent in the response.
      */

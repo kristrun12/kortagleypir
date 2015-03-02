@@ -7,7 +7,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.kla.cardservice.dao.CardDAO;
 import com.kla.cardservice.dao.UserDAO;
 import com.kla.cardservice.data.User;
 
@@ -29,8 +28,7 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String createUser(User newUser)
 	{
-		new CardDAO().createDatabase();
-		int userId = new UserDAO().addUser(newUser);
+		new UserDAO().addUser(newUser);
 		//System.out.println(userId);
 		System.out.println(newUser.getFirstName());
 		return newUser.getSsn();
