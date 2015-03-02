@@ -29,10 +29,9 @@ public class BaseDAO {
 		public void createDatabase(){
 			
 			try (Connection conn = getConnection();){
-				
-				
+					
 				Statement stmt = conn.createStatement();
-			      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
+			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users (firstName  varchar(255), lastName  varchar(255),ssn varchar(255), dev_id varchar(255))");
 				
 			} catch (URISyntaxException e) {
 				// TODO Auto-generated catch block
