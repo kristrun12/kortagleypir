@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.kla.cardservice.dao.CardDAO;
 import com.kla.cardservice.data.Card;
 
 @Path("/card")
@@ -18,7 +19,7 @@ public class CardResource {
 	public String sayHi()
 	{
 
-		//createDatabase();
+		new CardDAO().createDatabase();
 
 		return "Hi Token!";
 	}

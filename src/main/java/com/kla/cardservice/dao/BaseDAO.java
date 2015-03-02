@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class BaseDAO {
@@ -25,5 +26,22 @@ public class BaseDAO {
 		    return DriverManager.getConnection(dbUrl, props);
 		}
 		
+		public void createDatabase(){
+			
+			try (Connection conn = getConnection();){
+				
+				
+				Statement stmt = conn.createStatement();
+			      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
+				
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		
 }
