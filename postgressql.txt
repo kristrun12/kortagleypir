@@ -1,0 +1,16 @@
+búa til grunninn frá heroku
+
+heroku pg:pull kortagleypir::HEROKU_POSTGRESQL_COBALT_URL kortagleypir --app kortagleypir
+
+
+opna skelina til að vinna í database
+psql --dbname kortagleypir
+
+
+
+synir toflurnar
+\dt
+
+
+tengjast remote a heroku
+heroku pg:psql --app kortagleypir
