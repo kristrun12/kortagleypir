@@ -1,6 +1,6 @@
 package com.kla.cardservice;
 
-import static org.junit.Assert.assertTrue;
+import java.util.List;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
@@ -10,7 +10,6 @@ import javax.ws.rs.core.Response;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
-
 
 import com.kla.cardservice.data.User;
 
@@ -25,7 +24,12 @@ public class UserResourceTest extends JerseyTest {
         return new ResourceConfig(UserResource.class);
     }
 
-    
+    @Test
+    public void testGetAllUsers() 
+    {
+    	final List<User> responseMsg = target().path("user").path("all").request().get(List.class);
+    	System.out.println(responseMsg);
+    }
     
     /**
      * Test to see that the message "Got it!" is sent in the response.

@@ -1,5 +1,8 @@
 package com.kla.cardservice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,6 +25,14 @@ public class UserResource {
 		return "Hi User!";
 	}
 	
+	@GET
+	@Path("/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getAll()
+	{
+		return new UserDAO().getAllUsers();
+		
+	}
 	
 	@POST()
 	@Consumes(MediaType.APPLICATION_JSON)
