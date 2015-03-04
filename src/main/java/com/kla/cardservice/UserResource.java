@@ -37,11 +37,11 @@ public class UserResource {
 	@POST()
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String createUser(User newUser)
+	public void createUser(User newUser)
 	{
 		new UserDAO().addUser(newUser);
 		//System.out.println(userId);
-		System.out.println(newUser.getFirstName());
-		return newUser.getSsn();
+		//System.out.println(newUser.getFirstName());
+	
 	}
 }

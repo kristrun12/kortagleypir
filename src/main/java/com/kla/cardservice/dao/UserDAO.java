@@ -34,7 +34,7 @@ public class UserDAO extends BaseDAO{
 		}
 	}
 	
-	public int addUser(User user)
+	public void addUser(User user)
 	{
 		Connection conn = null;
 		try{
@@ -48,7 +48,7 @@ public class UserDAO extends BaseDAO{
 		{
 			DbUtils.closeQuietly(conn);
 		}
-		return 0;
+		
 	}
 	
 	
