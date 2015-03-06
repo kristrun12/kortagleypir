@@ -36,11 +36,29 @@ public class UserDAO extends BaseDAO{
 	
 	public int addUser(User user)
 	{
+		ResultSetHandler<Integer> h = new ResultSetHandler<Integer>() {
+		    public Integer handle(ResultSet rs) throws SQLException {
+		        if (!rs.next()) {
+		            return null;
+		        }
+		    
+		        return (Integer) rs.getObject(1);
+		    }
+		};
+		
 		Connection conn = null;
 		try{
 			conn = getConnection();
+			Object[] params = new Object[3];
+			params[0] = user.getName();
+			params[1] = user.getSsn();
+			params[2] = user.getDev_id();
+			
 			QueryRunner run = new QueryRunner();
-			run.update(conn, "INSERT INTO users(name, ssn, dev_id) values(?,?,?)", user.getName(),user.getSsn(),user.getDev_id());
+			Integer id = run.query(conn, "INSERT INTO users(name, ssn, dev_id) values(?,?,?)", 
+					h, params);
+			user.setId(id);
+			// run.update(conn, "INSERT INTO users(name, ssn, dev_id) values(?,?,?)", user.getName(),user.getSsn(),user.getDev_id());
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

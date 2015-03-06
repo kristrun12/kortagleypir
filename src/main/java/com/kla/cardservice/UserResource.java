@@ -37,11 +37,12 @@ public class UserResource {
 	@POST()
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public int createUser(User newUser)
+	public User createUser(User newUser)
 	{
 		int userId = new UserDAO().addUser(newUser);
+		newUser.setId(userId);
 		
 		//return userId to the user 
-		return userId;
+		return newUser;
 	}
 }
