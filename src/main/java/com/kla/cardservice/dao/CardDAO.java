@@ -36,7 +36,7 @@ public class CardDAO extends BaseDAO
 		try{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			run.update(conn, "INSERT INTO cards(cardholder, cardnumber) values(?,?)", card.getCardHolderName(), card.getCardNumber());
+			run.update(conn, "INSERT INTO cards(cardholder, cardnumber,cmv, devid, expdate) values(?,?,?,?,?,?)", card.getCardholdername(),card.getCardnumber(), card.getCmv(),card.getDevid(),card.getExpdate());
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,8 +57,13 @@ public class CardDAO extends BaseDAO
 				//move data from the result set into card
 				
 				final Card card = new Card();
-				card.setCardHolderName(rs.getString("cardholder"));
-				card.setCardNumber(rs.getString("cardNumber"));
+				card.setCardholdername(rs.getString("cardholdername"));
+				card.setCardnumber(rs.getString("cardnumber"));
+				card.setCmv(rs.getInt("cmv"));
+				card.setDevid(rs.getInt("devid"));
+				card.setExpdate(rs.getString("expdate"));
+				card.setId(rs.getInt("id"));
+				
 				
 				cards.add(card);
 			}

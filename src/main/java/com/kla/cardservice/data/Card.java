@@ -7,24 +7,30 @@ public class Card
 {
 	private int id;
 	
-	private String cardHolderName;
+	private String cardholdername;
 
-	private String cardNumber;
+	private String cardnumber;
 	
-	public String getCardHolderName() {
-		return cardHolderName;
+	private String expdate;
+	
+	private int cmv;
+	
+	private int devid;
+	
+	public String getCardholdername() {
+		return cardholdername;
 	}
 
-	public void setCardHolderName(String cardHolderName) {
-		this.cardHolderName = cardHolderName;
+	public void setCardholdername(String cardholdername) {
+		this.cardholdername = cardholdername;
 	}
 
-	public String getCardNumber() {
-		return cardNumber;
+	public String getCardnumber() {
+		return cardnumber;
 	}
 
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
+	public void setCardnumber(String cardnumber) {
+		this.cardnumber = cardnumber;
 	}
 
 	public int getId() {
@@ -33,6 +39,30 @@ public class Card
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getExpdate() {
+		return expdate;
+	}
+
+	public void setExpdate(String expdate) {
+		this.expdate = expdate;
+	}
+
+	public int getCmv() {
+		return cmv;
+	}
+
+	public void setCmv(int cmv) {
+		this.cmv = cmv;
+	}
+
+	public int getDevid() {
+		return devid;
+	}
+
+	public void setDevid(int devid) {
+		this.devid = devid;
 	}
 	
 }

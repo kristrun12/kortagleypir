@@ -44,8 +44,8 @@ public class CardResourceTest extends JerseyTest {
     @Test
     public void testPost() {
     	Card newCard = new Card();
-    	newCard.setCardHolderName("Palli sig");
-    	newCard.setCardNumber("123123123");
+    	newCard.setCardholdername("Palli sig");
+    	newCard.setCardnumber("123123123");
     	
     	
         final Response responseMsg = target().path("card").request().post(Entity.entity(newCard, MediaType.APPLICATION_JSON));

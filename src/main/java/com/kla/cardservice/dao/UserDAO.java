@@ -74,6 +74,7 @@ public class UserDAO extends BaseDAO{
 		    	  user.setName(rs.getString("name"));
 		    	  user.setSsn(rs.getString("ssn"));
 		    	  user.setDev_id(rs.getString("dev_id"));
+		    	  user.setId(rs.getInt("id"));
 		    	  
 		    	  users.add(user);
 		      }
