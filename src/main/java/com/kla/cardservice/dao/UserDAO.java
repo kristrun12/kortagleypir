@@ -55,7 +55,7 @@ public class UserDAO extends BaseDAO{
 			params[2] = user.getDev_id();
 			
 			QueryRunner run = new QueryRunner();
-			Integer id = run.query(conn, "INSERT INTO users(name, ssn, dev_id) values(?,?,?)", 
+			Integer id = run.query(conn, "INSERT INTO users(name, ssn, dev_id) values(?,?,?) RETURNING id", 
 					h, params);
 			user.setId(id);
 			// run.update(conn, "INSERT INTO users(name, ssn, dev_id) values(?,?,?)", user.getName(),user.getSsn(),user.getDev_id());
