@@ -7,10 +7,10 @@ public class User {
 		
 	//socialsecurity number
 	private String ssn;
-	private String firstName;
-	private String lastName;
+	private String name;
 	//device id
 	private String dev_id;
+	//from data table
 	private int id;
 	
 	public String getDev_id() {
@@ -21,14 +21,6 @@ public class User {
 		this.dev_id = dev_id;
 	}
 
-	public String getLastName() {
-		
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 
 	public String getSsn() {
 		return ssn;
@@ -38,12 +30,12 @@ public class User {
 		this.ssn = ssn;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getId() {

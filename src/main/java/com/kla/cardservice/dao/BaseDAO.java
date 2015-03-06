@@ -32,7 +32,9 @@ public class BaseDAO {
 			try (Connection conn = getConnection();){
 					
 				Statement stmt = conn.createStatement();
-			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users (firstName  varchar(255), lastName  varchar(255),ssn varchar(255), dev_id varchar(255))");
+				//stmt.executeUpdate("DROP TABLE IF EXISTS users");
+			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY,name varchar(255), ssn varchar(255), dev_id varchar(255))");
+			    //stmt.executeUpdate("CREATE TABLE IF NOT EXISTS cards (cardHolderName varchar(255), cardNumber int)");
 				
 			} catch (URISyntaxException e) {
 				// TODO Auto-generated catch block

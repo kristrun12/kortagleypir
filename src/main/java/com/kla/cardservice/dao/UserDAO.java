@@ -27,20 +27,20 @@ public class UserDAO extends BaseDAO{
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new RuntimeException("COuld not query users", e);
+			throw new RuntimeException("Could not query users", e);
 		}finally
 		{
 			DbUtils.closeQuietly(conn);
 		}
 	}
 	
-	public void addUser(User user)
+	public int addUser(User user)
 	{
 		Connection conn = null;
 		try{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			run.update(conn, "INSERT INTO users(firstname, lastname, ssn, dev_id) values(?,?,?,?)", user.getFirstName(),user.getLastName(),user.getSsn(),user.getDev_id());
+			run.update(conn, "INSERT INTO users(name, ssn, dev_id) values(?,?,?)", user.getName(),user.getSsn(),user.getDev_id());
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,6 +48,8 @@ public class UserDAO extends BaseDAO{
 		{
 			DbUtils.closeQuietly(conn);
 		}
+		//get the userId to return to phone
+		return user.getId();
 		
 	}
 	
@@ -69,8 +71,7 @@ public class UserDAO extends BaseDAO{
 		    	  //
 		    	  // Move data from the result set into user object
 		    	  final User user = new User();
-		    	  user.setFirstName(rs.getString("firstName"));
-		    	  user.setLastName(rs.getString("lastName"));
+		    	  user.setName(rs.getString("name"));
 		    	  user.setSsn(rs.getString("ssn"));
 		    	  user.setDev_id(rs.getString("dev_id"));
 		    	  

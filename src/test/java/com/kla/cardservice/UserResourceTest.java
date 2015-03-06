@@ -37,8 +37,7 @@ public class UserResourceTest extends JerseyTest {
     @Test
     public void testUserPost() {
     	User user = new User();
-    	user.setFirstName("Bella");
-    	user.setLastName("Beenno");
+    	user.setName("Bella Beenno");
     	user.setSsn("12345432");
     	user.setDev_id("00");
     	

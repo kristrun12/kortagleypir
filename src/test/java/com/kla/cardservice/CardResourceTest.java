@@ -25,12 +25,12 @@ public class CardResourceTest extends JerseyTest {
     /**
      * Test to see that the message "Got it!" is sent in the response.
      */
-    @Test
+   /* @Test
     public void tesstGetIt() {
         final String responseMsg = target().path("card").path("123").request().get(String.class);
 
         assertTrue(responseMsg.contains("123"));
-    }
+    }*/
     
     @Test
     public void testGetCard() {
