@@ -42,7 +42,7 @@ public class CardResource {
 	public void registerCard(Card newCard)
 	{
 		new CardDAO().registerCard(newCard);
-	
+		return newCard;
 	}
 
 	
