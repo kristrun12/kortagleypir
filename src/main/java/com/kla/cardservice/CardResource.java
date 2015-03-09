@@ -39,7 +39,7 @@ public class CardResource {
 	@POST()
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void registerCard(Card newCard)
+	public Card registerCard(Card newCard)
 	{
 		new CardDAO().registerCard(newCard);
 		return newCard;
