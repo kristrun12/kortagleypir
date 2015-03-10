@@ -13,6 +13,9 @@ import org.junit.Test;
 
 import com.kla.cardservice.data.Card;
 
+
+
+
 public class CardResourceTest extends JerseyTest {
 
 	
@@ -44,8 +47,14 @@ public class CardResourceTest extends JerseyTest {
     @Test
     public void testPost() {
     	Card newCard = new Card();
+    	newCard.setUsr_id("7");
     	newCard.setCardholder("Palli sig");
     	newCard.setCardnumber("123123123");
+    	newCard.setCvv("555");
+    	newCard.setValidity("15/15");
+    	newCard.setDev_id("6");
+    	
+    	
     	
     	
         final Response responseMsg = target().path("card").request().post(Entity.entity(newCard, MediaType.APPLICATION_JSON));

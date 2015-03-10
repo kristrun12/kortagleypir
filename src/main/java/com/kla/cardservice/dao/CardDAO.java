@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
@@ -36,7 +37,7 @@ public class CardDAO extends BaseDAO
 		try{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			run.update(conn, "INSERT INTO cards(cardholder, cardnumber,cmv, devid, expdate) values(?,?,?,?,?,?)", card.getCardholder(),card.getCardnumber(), card.getCvv(),card.getDevid(),card.getuserid());
+			run.update(conn, "INSERT INTO cards(usr_id, cardholder,cardnumber,validity,cvv, dev_id ) values(?,?,?,?,?,?)", card.getUsr_id(),card.getCardholder(),card.getCardnumber(),card.getValidity(), card.getCvv(),card.getDev_id());
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,6 +49,7 @@ public class CardDAO extends BaseDAO
 	
 	private class CardListResultSetHandler implements ResultSetHandler<List<Card>>
 	{
+	
 		@Override
 		public List<Card> handle (ResultSet rs) throws SQLException
 		{
@@ -59,10 +61,10 @@ public class CardDAO extends BaseDAO
 				final Card card = new Card();
 				card.setCardholder(rs.getString("cardholder"));
 				card.setCardnumber(rs.getString("cardnumber"));
-				card.setCvv(rs.getInt("cvv"));
-				card.setDevid(rs.getInt("devid"));
+				card.setCvv(rs.getString("cvv"));
+				card.setDev_id(rs.getString("dev_id"));
 				card.setValidity(rs.getString("validity"));
-				card.setuserid(rs.getInt("userid"));
+				card.setUsr_id(rs.getString("usr_id"));
 				
 				cards.add(card);
 			}

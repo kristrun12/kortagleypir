@@ -35,7 +35,7 @@ public class BaseDAO {
 				stmt.executeUpdate("DROP TABLE IF EXISTS users");
 				stmt.executeUpdate("DROP TABLE IF EXISTS cards");
 			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY,name varchar(255), ssn varchar(255), dev_id varchar(255))");
-			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS cards (userid int,cardnolder varchar(255), cardnumber int, validity varchar (6), cvv int,devid int)");
+			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS cards (usr_id varchar(255),cardholder varchar(255), cardnumber varchar (255), validity varchar (6), cvv varchar(255),dev_id varchar(255))");
 				
 			} catch (URISyntaxException e) {
 				// TODO Auto-generated catch block

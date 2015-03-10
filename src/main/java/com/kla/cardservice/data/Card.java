@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Card 
 {
-	private int userid;
+	private String usr_id;
 	
 	private String cardholder;
 
@@ -13,9 +13,9 @@ public class Card
 	
 	private String validity;
 	
-	private int cvv;
+	private String cvv;
 	
-	private int devid;
+	private String dev_id;
 	
 	public String getCardholder() {
 		return cardholder;
@@ -33,15 +33,15 @@ public class Card
 		this.cardnumber = cardnumber;
 	}
 
-	public int getuserid() {
-		return userid;
+	public String getUsr_id() {
+		return usr_id;
 	}
 
-	public void setuserid(int userid) {
-		this.userid = userid;
+	public void setUsr_id(String usr_id) {
+		this.usr_id = usr_id;
 	}
 
-	public String getvalidity() {
+	public String getValidity() {
 		return validity;
 	}
 
@@ -49,20 +49,20 @@ public class Card
 		this.validity = validity;
 	}
 
-	public int getCvv() {
+	public String getCvv() {
 		return cvv;
 	}
 
-	public void setCvv(int cvv) {
+	public void setCvv(String cvv) {
 		this.cvv = cvv;
 	}
 
-	public int getDevid() {
-		return devid;
+	public String getDev_id() {
+		return dev_id;
 	}
 
-	public void setDevid(int devid) {
-		this.devid = devid;
+	public void setDev_id(String dev_id) {
+		this.dev_id = dev_id;
 	}
 	
 }
