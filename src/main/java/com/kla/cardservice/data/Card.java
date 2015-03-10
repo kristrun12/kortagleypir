@@ -5,24 +5,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Card 
 {
-	private int id;
+	private int userid;
 	
-	private String cardholdername;
+	private String cardholder;
 
 	private String cardnumber;
 	
-	private String expdate;
+	private String validity;
 	
-	private int cmv;
+	private int cvv;
 	
 	private int devid;
 	
-	public String getCardholdername() {
-		return cardholdername;
+	public String getCardholder() {
+		return cardholder;
 	}
 
-	public void setCardholdername(String cardholdername) {
-		this.cardholdername = cardholdername;
+	public void setCardholder(String cardholder) {
+		this.cardholder = cardholder;
 	}
 
 	public String getCardnumber() {
@@ -33,28 +33,28 @@ public class Card
 		this.cardnumber = cardnumber;
 	}
 
-	public int getId() {
-		return id;
+	public int getuserid() {
+		return userid;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setuserid(int userid) {
+		this.userid = userid;
 	}
 
-	public String getExpdate() {
-		return expdate;
+	public String getvalidity() {
+		return validity;
 	}
 
-	public void setExpdate(String expdate) {
-		this.expdate = expdate;
+	public void setValidity(String validity) {
+		this.validity = validity;
 	}
 
-	public int getCmv() {
-		return cmv;
+	public int getCvv() {
+		return cvv;
 	}
 
-	public void setCmv(int cmv) {
-		this.cmv = cmv;
+	public void setCvv(int cvv) {
+		this.cvv = cvv;
 	}
 
 	public int getDevid() {

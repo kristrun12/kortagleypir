@@ -44,7 +44,7 @@ public class CardResourceTest extends JerseyTest {
     @Test
     public void testPost() {
     	Card newCard = new Card();
-    	newCard.setCardholdername("Palli sig");
+    	newCard.setCardholder("Palli sig");
     	newCard.setCardnumber("123123123");
     	
     	
