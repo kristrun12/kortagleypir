@@ -22,6 +22,8 @@ public class CardResourceTest extends JerseyTest {
 	
     @Override
     protected Application configure() {
+    	
+    	
         return new ResourceConfig(CardResource.class);
     }
 
@@ -53,7 +55,6 @@ public class CardResourceTest extends JerseyTest {
     	newCard.setCvv("555");
     	newCard.setValidity("15/15");
     	newCard.setDev_id("6");
-    	
     	
     	
     	
