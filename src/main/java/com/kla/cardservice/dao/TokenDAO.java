@@ -53,7 +53,8 @@ public class TokenDAO extends BaseDAO{
 	{
 
 		@Override
-		public List<Token> handle(ResultSet rs) throws SQLException {
+		public List<Token> handle(ResultSet rs) throws SQLException 
+		{
 			
 			final List <Token>  tokens = new ArrayList<Token>();
 			while( rs.next() )
