@@ -39,7 +39,7 @@ public class TokenDAO extends BaseDAO{
 		try{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			run.update(conn, "INSERT INTO tokens(usr_id, dev_id,tokenone,tokentwo,tokenthree ) values(?,?,?,?,?)", token.getUsr_id(),token.getDevice_id(),token.getTokenone(),token.getTokentwo(),token.getTokenthree());
+			run.update(conn, "INSERT INTO tokens(usr_id, device_id,tokenone,tokentwo,tokenthree ) values(?,?,?,?,?)", token.getUsr_id(),token.getDevice_id(),token.getTokenone(),token.getTokentwo(),token.getTokenthree());
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
