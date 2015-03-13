@@ -60,11 +60,13 @@ public class TokenDAO extends BaseDAO{
 			while( rs.next() )
 			{
 				final Token token = new Token();
-				token.setUsr_id("usr_id");
-				token.setDevice_id("device_id");
-				token.setTokenone("tokenone");
-				token.setTokentwo("tokentwo");
-				token.setTokenthree("tokenthree");
+				token.setUsr_id(rs.getString("usr_id"));
+				token.setDevice_id(rs.getString("device_id"));
+				token.setTokenone(rs.getString("tokenone"));
+				token.setTokentwo(rs.getString("tokentwo"));
+				token.setTokenthree(rs.getString("tokenthree"));
+				
+				tokens.add(token);
 				
 			}
 			return tokens;
