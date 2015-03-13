@@ -10,20 +10,32 @@ import java.util.List;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.log4j.Logger;
 
 import com.kla.cardservice.data.Token;
 
+/**
+ * Handles queryes and updates for Tokens in database
+ * @author kla
+ *
+ */
 public class TokenDAO extends BaseDAO{
+	 
+	private static final Logger logger = Logger.getLogger(TokenDAO.class);
 	
+	/** 
+	 * @return Returns a list of all the tokens from database
+	 */
 	public List <Token> getAllTokens ()
 	{
 		Connection conn = null;
 		try{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
+			logger.debug("Running all tokens query");
 			return run.query(conn, "SELECT * FROM tokens", new TokenListResultSetHandler());
 		}catch(SQLException | URISyntaxException e){
-			e.printStackTrace();
+			logger.error("error getting all tokens", e);
 			throw new RuntimeException("Could not query tokens",e);
 		}finally
 		{
@@ -33,6 +45,10 @@ public class TokenDAO extends BaseDAO{
 	}
 		
 	
+	/**
+	 * Saves a new token to database
+	 * @param token Token to store in database
+	 */
 	public void registerToken(Token token)
 	{
 		Connection conn = null;
@@ -49,6 +65,13 @@ public class TokenDAO extends BaseDAO{
 		}
 		
 	}
+	
+	
+	/**
+	 * Handler to return results from Select * from tokens query.  
+	 * @author kla
+	 *
+	 */
 	private class TokenListResultSetHandler implements ResultSetHandler<List<Token>>
 	{
 
@@ -59,6 +82,8 @@ public class TokenDAO extends BaseDAO{
 			final List <Token>  tokens = new ArrayList<Token>();
 			while( rs.next() )
 			{
+				//
+				// Process token data from database and insert into new token object
 				final Token token = new Token();
 				token.setUsr_id(rs.getString("usr_id"));
 				token.setDevice_id(rs.getString("device_id"));
@@ -66,6 +91,8 @@ public class TokenDAO extends BaseDAO{
 				token.setTokentwo(rs.getString("tokentwo"));
 				token.setTokenthree(rs.getString("tokenthree"));
 				
+				//
+				// Add the processed token to the tokens list
 				tokens.add(token);
 				
 			}
