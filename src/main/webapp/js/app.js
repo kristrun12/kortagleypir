@@ -34,3 +34,31 @@ app.controller('userController', ['$scope', '$http','$log', function($scope,$htt
 	
 	$scope.loadData();
 }]);
+
+app.controller('cardController', ['$scope', '$http','$log', function($scope,$http,$log) {
+	$scope.cards = [];
+	
+	
+	 $scope.loadData = function(){
+		$http.get("card/all").success(
+				function (cardData) {
+					$scope.cards = cardData;
+				});
+	};
+	
+	$scope.loadData();
+}]);
+
+app.controller('tokenController', ['$scope', '$http','$log', function($scope,$http,$log) {
+	$scope.tokens = [];
+	
+	
+	 $scope.loadData = function(){
+		$http.get("token/all").success(
+				function (tokenData) {
+					$scope.tokens = tokenData;
+				});
+	};
+	
+	$scope.loadData();
+}]);

@@ -1,1 +1,19 @@
-tokens
+<div  ng-controller="tokenController"> 
+<button class="btn" ng-click="loadData()">Reload data</button>
+<table class="table table-condensed table-striped">
+<thead>
+	<th>#</th><th>usr_id</th><th>device_id</th><th>tokenone</th><th>tokentwo</th><th>tokenthree</th>
+</thead>
+<tbody>
+	<tr ng-repeat="card in cards"> 
+		<td>{{$index+1}}</td>
+		<td>{{token.usr_id}}</td>
+		<td>{{token.device_id}}</td>
+		<td>{{token.tokenone}}</td>
+		<td>{{token.tokentwo}}</td>
+		<td>{{token.tokenthree}}</td>		
+	</tr>
+</tbody>
+</table>
+</div>
+
