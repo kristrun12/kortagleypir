@@ -1,11 +1,12 @@
 <div  ng-controller="cardController"> 
 <button class="btn" ng-click="loadData()">Reload data</button>
+<input ng-model="queryFilter" placeholder="Text to filter"></input>
 <table class="table table-condensed table-striped">
 <thead>
 	<th>#</th><th>usr_id</th><th>cardholder</th><th>cardnumber</th><th>validity</th><th>cvv</th><th>dev_id</th>
 </thead>
 <tbody>
-	<tr ng-repeat="card in cards"> 
+	<tr ng-repeat="card in cards | filter:queryFilter"> 
 		<td>{{$index+1}}</td>
 		<td>{{card.usr_id}}</td>
 		<td>{{card.cardholder}}</td>

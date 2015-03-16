@@ -1,11 +1,12 @@
 <div  ng-controller="tokenController"> 
 <button class="btn" ng-click="loadData()">Reload data</button>
+<input ng-model="queryFilter" placeholder="Text to filter"></input>
 <table class="table table-condensed table-striped">
 <thead>
 	<th>#</th><th>usr_id</th><th>device_id</th><th>tokenone</th><th>tokentwo</th><th>tokenthree</th>
 </thead>
 <tbody>
-	<tr ng-repeat="token in tokens"> 
+	<tr ng-repeat="token in tokens | filter:queryFilter"> 
 		<td>{{$index+1}}</td>
 		<td>{{token.usr_id}}</td>
 		<td>{{token.device_id}}</td>
