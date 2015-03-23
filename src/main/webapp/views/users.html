@@ -4,11 +4,11 @@
 <input ng-model="queryFilter" placeholder="Text to filter"></input>
 <table class="table table-condensed table-striped">
 <thead>
-	<th>#</th><th>id</th><th>name</th><th>ssn</th><th>device_id</th>
+	<th>#</th><th>usr_id</th><th>name</th><th>ssn</th><th>device_id</th>
 </thead>
 <tbody>
 	<tr ng-repeat="user in users | filter:queryFilter"> 
-		<td>{{$index+1}}</td><td>{{user.id}}</td><td>{{user.name}}</td><td>{{user.ssn}}</td><td>{{user.dev_id}}</td>
+		<td>{{$index+1}}</td><td>{{user.usr_id}}</td><td>{{user.name}}</td><td>{{user.ssn}}</td><td>{{user.device_id}}</td>
 	</tr>
 </tbody>
 </table>
