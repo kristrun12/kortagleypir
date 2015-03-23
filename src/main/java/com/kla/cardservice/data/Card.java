@@ -17,6 +17,16 @@ public class Card
 	
 	private String device_id;
 	
+	private String pin;
+	
+	public String getPin() {
+		return pin;
+	}
+
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+
 	public String getCardholder() {
 		return cardholder;
 	}

@@ -55,6 +55,7 @@ public class CardResourceTest extends JerseyTest {
     	newCard.setCvv("555");
     	newCard.setValidity("15/15");
     	newCard.setDevice_id("6");
+    	newCard.setPin("5289");
     	
     	
     	
