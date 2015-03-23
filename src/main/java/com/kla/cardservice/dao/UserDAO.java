@@ -52,12 +52,12 @@ public class UserDAO extends BaseDAO{
 			Object[] params = new Object[3];
 			params[0] = user.getName();
 			params[1] = user.getSsn();
-			params[2] = user.getDev_id();
+			params[2] = user.getDevice_id();
 			
 			QueryRunner run = new QueryRunner();
-			Integer id = run.query(conn, "INSERT INTO users(name, ssn, dev_id) values(?,?,?) RETURNING id", 
+			Integer id = run.query(conn, "INSERT INTO users(name, ssn, device_id) values(?,?,?) RETURNING usr_id", 
 					h, params);
-			user.setId(id);
+			user.setUsr_id(id);
 			// run.update(conn, "INSERT INTO users(name, ssn, dev_id) values(?,?,?)", user.getName(),user.getSsn(),user.getDev_id());
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
@@ -67,7 +67,7 @@ public class UserDAO extends BaseDAO{
 			DbUtils.closeQuietly(conn);
 		}
 		//get the userId to return to phone
-		return user.getId();
+		return user.getUsr_id();
 		
 	}
 	
@@ -91,8 +91,8 @@ public class UserDAO extends BaseDAO{
 		    	  final User user = new User();
 		    	  user.setName(rs.getString("name"));
 		    	  user.setSsn(rs.getString("ssn"));
-		    	  user.setDev_id(rs.getString("dev_id"));
-		    	  user.setId(rs.getInt("id"));
+		    	  user.setDevice_id(rs.getString("device_id"));
+		    	  user.setUsr_id(rs.getInt("usr_id"));
 		    	  
 		    	  users.add(user);
 		      }

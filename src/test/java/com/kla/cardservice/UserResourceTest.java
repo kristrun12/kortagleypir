@@ -39,7 +39,7 @@ public class UserResourceTest extends JerseyTest {
     	User user = new User();
     	user.setName("Bella Beenno");
     	user.setSsn("12345432");
-    	user.setDev_id("00");
+    	user.setDevice_id("00");
     	
     	
         final Response responseMsg = target().path("user").request().post(Entity.entity(user, MediaType.APPLICATION_JSON));

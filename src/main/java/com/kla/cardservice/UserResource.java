@@ -40,7 +40,7 @@ public class UserResource {
 	public User createUser(User newUser)
 	{
 		int userId = new UserDAO().addUser(newUser);
-		newUser.setId(userId);
+		newUser.setUsr_id(userId);
 		
 		//return userId to the user 
 		return newUser;
