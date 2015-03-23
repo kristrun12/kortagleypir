@@ -3,7 +3,7 @@
 <input ng-model="queryFilter" placeholder="Text to filter"></input>
 <table class="table table-condensed table-striped">
 <thead>
-	<th>#</th><th>usr_id</th><th>cardholder</th><th>cardnumber</th><th>validity</th><th>cvv</th><th>dev_id</th>
+	<th>#</th><th>usr_id</th><th>cardholder</th><th>cardnumber</th><th>validity</th><th>cvv</th><th>device_id</th>
 </thead>
 <tbody>
 	<tr ng-repeat="card in cards | filter:queryFilter"> 
@@ -13,7 +13,7 @@
 		<td>{{card.cardnumber}}</td>
 		<td>{{card.validity}}</td>
 		<td>{{card.cvv}}</td>
-		<td>{{card.dev_id}}</td>
+		<td>{{card.device_id}}</td>
 	</tr>
 </tbody>
 </table>

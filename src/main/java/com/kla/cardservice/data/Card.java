@@ -15,7 +15,7 @@ public class Card
 	
 	private String cvv;
 	
-	private String dev_id;
+	private String device_id;
 	
 	public String getCardholder() {
 		return cardholder;
@@ -57,12 +57,12 @@ public class Card
 		this.cvv = cvv;
 	}
 
-	public String getDev_id() {
-		return dev_id;
+	public String getDevice_id() {
+		return device_id;
 	}
 
-	public void setDev_id(String dev_id) {
-		this.dev_id = dev_id;
+	public void setDevice_id(String device_id) {
+		this.device_id = device_id;
 	}
 	
 }
