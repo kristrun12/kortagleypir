@@ -18,6 +18,15 @@ app.controller('mainController', ['$scope', '$http','$log', function($scope,$htt
 	$scope.gotoTokens = function(){
 		$scope.page = 'views/tokens.html';
 	};
+	$scope.gotoMainCard = function(){
+		$scope.page = 'views/mainCard.html';
+	};
+	$scope.gotoExtraCard = function(){
+		$scope.page = 'views/extraCard.html';
+	};
+	$scope.gotoSpareCard = function(){
+		$scope.page = 'views/spareCard.html';
+	};
 	
 }]);
 
