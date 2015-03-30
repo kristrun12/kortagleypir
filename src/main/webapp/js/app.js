@@ -62,3 +62,42 @@ app.controller('tokenController', ['$scope', '$http','$log', function($scope,$ht
 	
 	$scope.loadData();
 }]);
+app.controller('mainCardController', ['$scope', '$http','$log', function($scope,$http,$log) {
+	$scope.transactions = [];
+	
+	
+	 $scope.loadData = function(){
+		$http.get("transaction/allmain").success(
+				function (transactionMainData) {
+					$scope.transactions = transactionMainData;
+				});
+	};
+	
+	$scope.loadData();
+}]);
+app.controller('extraCardController', ['$scope', '$http','$log', function($scope,$http,$log) {
+	$scope.transactions = [];
+	
+	
+	 $scope.loadData = function(){
+		$http.get("transaction/allextra").success(
+				function (transactionExtraData) {
+					$scope.transactions = transactionExtraData;
+				});
+	};
+	
+	$scope.loadData();
+}]);
+app.controller('spareCardController', ['$scope', '$http','$log', function($scope,$http,$log) {
+	$scope.transactions = [];
+	
+	
+	 $scope.loadData = function(){
+		$http.get("transaction/allspare").success(
+				function (transactionMainData) {
+					$scope.transactions = transactionSpareData;
+				});
+	};
+	
+	$scope.loadData();
+}]);

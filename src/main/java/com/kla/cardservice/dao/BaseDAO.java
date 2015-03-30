@@ -39,10 +39,19 @@ public class BaseDAO {
 				//stmt.executeUpdate("DROP TABLE IF EXISTS users");
 				//stmt.executeUpdate("DROP TABLE IF EXISTS cards");
 				//stmt.executeUpdate("DROP TABLE IF EXISTS tokens");
+				stmt.executeUpdate("DROP TABLE IF EXISTS mainCard");
+				//stmt.executeUpdate("DROP TABLE IF EXISTS extraCard");
+				//stmt.executeUpdate("DROP TABLE IF EXISTS spareCard");
+				//stmt.ececuteUpdate("DROP TABLE IF EXISTS tokenToCard");
+				
 				
 			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users (usr_id serial PRIMARY KEY,name varchar(255), ssn varchar(255), device_id varchar(255))");
 			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS cards (usr_id varchar(255),cardholder varchar(255), cardnumber varchar (255), validity varchar (6), cvv varchar(255),device_id varchar(255),pin varchar (255))");
 			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS tokens(usr_id varchar (255), device_id varchar (255),token varchar(255),date varchar (255))");
+			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS mainCard(cardnumber varchar (255), vendor varchar (255), prize varchar(255), total varchar(255),date varchar (255))");
+			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS extraCard(cardnumber varchar (255), vendor varchar (255), prize varchar(255), total varchar(255),date varchar (255))");
+			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS spareCard(cardnumber varchar (255), vendor varchar (255), prize varchar(255), total varchar(255),date varchar (255))");
+			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS tokenToCard(cardnumber varchar (255), total varchar(255))");
 				
 			} catch (URISyntaxException e) {
 				// TODO Auto-generated catch block

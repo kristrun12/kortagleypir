@@ -1,0 +1,18 @@
+<div  ng-controller="extraCardController"> 
+<button class="btn" ng-click="loadData()">Reload data</button>
+<input ng-model="queryFilter" placeholder="Text to filter"></input>
+<table class="table table-condensed table-striped">
+<thead>
+	<th>#</th><th>vendor</th><th>prize</th><th>date</th><th>total</th>
+</thead>
+<tbody>
+	<tr ng-repeat="extraCard in extraCards | filter:queryFilter"> 
+		<td>{{$index+1}}</td>
+		<td>{{transaction.vendor}}</td>
+		<td>{{transaction.prize}}</td>
+		<td>{{transaction.date}}</td>
+		<td>{{transaction.total}}</td>
+	</tr>
+</tbody>
+</table>
+</div>
