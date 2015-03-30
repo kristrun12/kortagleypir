@@ -1,13 +1,29 @@
 package com.kla.cardservice.data;
 
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Token {
 	
-	String tokenone;
-	String tokentwo;
-	String tokenthree;
+	
 	String usr_id;
 	String device_id;
+	String token;
+	String date;
 	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
 	public String getUsr_id() {
 		return usr_id;
 	}
@@ -20,24 +36,7 @@ public class Token {
 	public void setDevice_id(String device_id) {
 		this.device_id = device_id;
 	}
-	public String getTokenone() {
-		return tokenone;
-	}
-	public void setTokenone(String tokenone) {
-		this.tokenone = tokenone;
-	}
-	public String getTokentwo() {
-		return tokentwo;
-	}
-	public void setTokentwo(String tokentwo) {
-		this.tokentwo = tokentwo;
-	}
-	public String getTokenthree() {
-		return tokenthree;
-	}
-	public void setTokenthree(String tokenthree) {
-		this.tokenthree = tokenthree;
-	}
+	
 	
 	
 }
