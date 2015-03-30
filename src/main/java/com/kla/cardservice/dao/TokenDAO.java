@@ -33,7 +33,7 @@ public class TokenDAO extends BaseDAO{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
 			logger.debug("Running all tokens query");
-			return run.query(conn, "SELECT * FROM tokens, ORDERBY DESC", new TokenListResultSetHandler());
+			return run.query(conn, "SELECT * FROM tokens", new TokenListResultSetHandler());
 		}catch(SQLException | URISyntaxException e){
 			logger.error("error getting all tokens", e);
 			throw new RuntimeException("Could not query tokens",e);
@@ -55,7 +55,7 @@ public class TokenDAO extends BaseDAO{
 		try{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			run.update(conn, "INSERT INTO tokens(usr_id, device_id,token, date ) values(?,?,?,?)", token.getUsr_id(),token.getDevice_id(),token.getToken(),token.getDate());
+			run.update(conn, "INSERT INTO tokens(usr_id, device_id,tokenone,tokentwo,tokenthree ) values(?,?,?,?,?)", token.getUsr_id(),token.getDevice_id(),token.getTokenone(),token.getTokentwo(),token.getTokenthree());
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,8 +87,9 @@ public class TokenDAO extends BaseDAO{
 				final Token token = new Token();
 				token.setUsr_id(rs.getString("usr_id"));
 				token.setDevice_id(rs.getString("device_id"));
-				token.setToken(rs.getString("token"));
-				token.setDate(rs.getString("date"));
+				token.setTokenone(rs.getString("tokenone"));
+				token.setTokentwo(rs.getString("tokentwo"));
+				token.setTokenthree(rs.getString("tokenthree"));
 				
 				//
 				// Add the processed token to the tokens list

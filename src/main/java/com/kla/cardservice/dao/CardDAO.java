@@ -4,7 +4,6 @@ import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +31,6 @@ public class CardDAO extends BaseDAO
 			DbUtils.closeQuietly(conn);
 		}
 	}
-	
 	public void registerCard(Card card)
 	{
 		Connection conn = null;
