@@ -2,10 +2,15 @@ package com.kla.cardservice.data;
 
 public class Token {
 	
-	String tokenone;
-	String tokentwo;
-	String tokenthree;
+	String token;
+	String date;
 	String usr_id;
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	String device_id;
 	
 	public String getUsr_id() {
@@ -20,24 +25,11 @@ public class Token {
 	public void setDevice_id(String device_id) {
 		this.device_id = device_id;
 	}
-	public String getTokenone() {
-		return tokenone;
+	public String getToken() {
+		return token;
 	}
-	public void setTokenone(String tokenone) {
-		this.tokenone = tokenone;
+	public void setToken(String token) {
+		this.token = token;
 	}
-	public String getTokentwo() {
-		return tokentwo;
-	}
-	public void setTokentwo(String tokentwo) {
-		this.tokentwo = tokentwo;
-	}
-	public String getTokenthree() {
-		return tokenthree;
-	}
-	public void setTokenthree(String tokenthree) {
-		this.tokenthree = tokenthree;
-	}
-	
 	
 }

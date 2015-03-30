@@ -1,6 +1,9 @@
 package com.kla.cardservice;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,9 +37,19 @@ public class TokenResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	public Token getToken(Token newToken)
 	{
-		newToken.setTokenone(UUID.randomUUID().toString());
-		newToken.setTokentwo(UUID.randomUUID().toString());
-		newToken.setTokenthree(UUID.randomUUID().toString());
+		
+		newToken.setToken(UUID.randomUUID().toString());
+		//java.util.Date date = new java.util.Date();
+		//long time = date.getTime();
+		//String s = String.valueOf(date);
+		//newToken.setDate(s);
+		//DateFormat df = new SimpleDateFormat("yyyyMMdd  HH:mm");
+		//String sdt = df.format(new Date(System.currentTimeMillis()));
+		//newToken.setDate(sdt);
+		long now = System.currentTimeMillis();
+
+		java.util.Date date = new java.util.Date(now);
+		newToken.setDate(date.toString());
 		new TokenDAO().registerToken(newToken);
 		return newToken;
 	}

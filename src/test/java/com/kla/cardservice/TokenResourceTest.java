@@ -31,9 +31,8 @@ public class TokenResourceTest extends JerseyTest{
 	    	Token token = new Token();
 	    	token.setUsr_id("456");
 	    	token.setDevice_id("85125");
-	    	token.setTokenone("");
-	    	token.setTokentwo("");
-	    	token.setTokenthree("");
+	    	token.setToken("");
+	    
 	    	
 	    	
 	        final Response responseMsg = target().path("token").request().post(Entity.entity(token, MediaType.APPLICATION_JSON));
