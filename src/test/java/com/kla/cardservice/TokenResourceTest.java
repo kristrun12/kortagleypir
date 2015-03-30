@@ -32,7 +32,9 @@ public class TokenResourceTest extends JerseyTest{
 	    	token.setUsr_id("456");
 	    	token.setDevice_id("85125");
 	    	token.setToken("");
-	    
+	    	token.setDate("");
+	    	
+	    	
 	    	
 	    	
 	        final Response responseMsg = target().path("token").request().post(Entity.entity(token, MediaType.APPLICATION_JSON));

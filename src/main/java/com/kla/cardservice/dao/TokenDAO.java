@@ -33,7 +33,7 @@ public class TokenDAO extends BaseDAO{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
 			logger.debug("Running all tokens query");
-			return run.query(conn, "SELECT * FROM tokens, ORDERBY DESC", new TokenListResultSetHandler());
+			return run.query(conn, "SELECT * FROM tokens ORDER BY desc", new TokenListResultSetHandler());
 		}catch(SQLException | URISyntaxException e){
 			logger.error("error getting all tokens", e);
 			throw new RuntimeException("Could not query tokens",e);

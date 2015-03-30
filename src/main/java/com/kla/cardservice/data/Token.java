@@ -5,14 +5,15 @@ public class Token {
 	String token;
 	String date;
 	String usr_id;
+	String device_id;
+	
 	public String getDate() {
 		return date;
 	}
 	public void setDate(String date) {
 		this.date = date;
 	}
-	String device_id;
-	
+		
 	public String getUsr_id() {
 		return usr_id;
 	}

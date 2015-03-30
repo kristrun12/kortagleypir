@@ -1,9 +1,5 @@
 package com.kla.cardservice;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,12 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.kla.cardservice.dao.CardDAO;
 import com.kla.cardservice.dao.TokenDAO;
-import com.kla.cardservice.dao.UserDAO;
-import com.kla.cardservice.data.Card;
 import com.kla.cardservice.data.Token;
-import com.kla.cardservice.data.User;
 
 @Path("/token")
 public class TokenResource{

@@ -38,7 +38,7 @@ public class BaseDAO {
 				Statement stmt = conn.createStatement();
 				//stmt.executeUpdate("DROP TABLE IF EXISTS users");
 				//stmt.executeUpdate("DROP TABLE IF EXISTS cards");
-				stmt.executeUpdate("DROP TABLE IF EXISTS tokens");
+				//stmt.executeUpdate("DROP TABLE IF EXISTS tokens");
 				
 			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users (usr_id serial PRIMARY KEY,name varchar(255), ssn varchar(255), device_id varchar(255))");
 			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS cards (usr_id varchar(255),cardholder varchar(255), cardnumber varchar (255), validity varchar (6), cvv varchar(255),device_id varchar(255),pin varchar (255))");
