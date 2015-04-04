@@ -36,9 +36,9 @@ public class BaseDAO {
 			try (Connection conn = getConnection();){
 					
 				Statement stmt = conn.createStatement();
-				//stmt.executeUpdate("DROP TABLE IF EXISTS users");
-				//stmt.executeUpdate("DROP TABLE IF EXISTS cards");
-				//stmt.executeUpdate("DROP TABLE IF EXISTS tokens");
+				stmt.executeUpdate("DROP TABLE IF EXISTS users");
+				stmt.executeUpdate("DROP TABLE IF EXISTS cards");
+				stmt.executeUpdate("DROP TABLE IF EXISTS tokens");
 				//stmt.executeUpdate("DROP TABLE IF EXISTS mainCard");
 				//stmt.executeUpdate("DROP TABLE IF EXISTS extraCard");
 				//stmt.executeUpdate("DROP TABLE IF EXISTS spareCard");
