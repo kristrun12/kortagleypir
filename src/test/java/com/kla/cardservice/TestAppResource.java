@@ -70,11 +70,12 @@ public class TestAppResource extends JerseyTest {
 		System.out.println(responseCreateUser);
 
 		Token token = new Token();
-		token.setTokenitem(UUID.randomUUID().toString());
-		token.setDate(new Date());
+		//token.setTokenitem(UUID.randomUUID().toString());
+		//token.setDate(new Date());
 		token.setUsr_id(createdUser.getUsr_id());
 		token.setCard_id(createdCard.getCard_id());
-		token.isUsed();
+		
+		//token.isUsed();
 
 		final Response responseMsgT = target().path("token").request()
 				.post(Entity.entity(token, MediaType.APPLICATION_JSON));

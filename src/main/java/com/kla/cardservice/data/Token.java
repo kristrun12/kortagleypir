@@ -10,14 +10,21 @@ public class Token {
 	private int usr_id;
 	private int card_id;
 	private boolean used;
+	private String device_id;
 	
+	public String getDevice_id() {
+		return device_id;
+	}
+	public void setDevice_id(String device_id) {
+		this.device_id = device_id;
+	}
 	public int getCard_id() {
 		return card_id;
 	}
 	public void setCard_id(int card_id) {
 		this.card_id = card_id;
 	}
-	String device_id;
+	
 	
 	public Date getDate() {
 		return date;
