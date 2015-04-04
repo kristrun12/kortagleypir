@@ -11,7 +11,9 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
 
+import com.kla.cardservice.dao.UserDAO;
 import com.kla.cardservice.data.Card;
+import com.kla.cardservice.data.User;
 
 
 
@@ -48,8 +50,14 @@ public class CardResourceTest extends JerseyTest {
      */
     @Test
     public void testPost() {
+    	
+    	//get a valid user from the database
+    	User u = new UserDAO().getAllUsers().get(0);
+    	
+    	//simulates data comming from the app
     	Card newCard = new Card();
-    	newCard.setUsr_id("7");
+
+    	newCard.setUsr_id(u.getUsr_id());
     	newCard.setCardholder("Palli sig");
     	newCard.setCardnumber("123123123");
     	newCard.setCvv("555");
@@ -58,7 +66,7 @@ public class CardResourceTest extends JerseyTest {
     	newCard.setPin("5289");
     	
     	
-    	
+    	//register the newCArd
         final Response responseMsg = target().path("card").request().post(Entity.entity(newCard, MediaType.APPLICATION_JSON));
         
         System.out.println(responseMsg.getClass().getName());

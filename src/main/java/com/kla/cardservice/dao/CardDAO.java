@@ -31,13 +31,25 @@ public class CardDAO extends BaseDAO
 			DbUtils.closeQuietly(conn);
 		}
 	}
-	public void registerCard(Card card)
+	public int registerCard(Card card)
 	{
+		ResultSetHandler<Integer> h = new ResultSetHandler<Integer>() {
+		    public Integer handle(ResultSet rs) throws SQLException {
+		        if (!rs.next()) {
+		            return null;
+		        }
+		    
+		        return (Integer) rs.getObject(1);
+		    }
+		};
 		Connection conn = null;
 		try{
 			conn = getConnection();
+			Object[] params ={card.getCardholder(),card.getCardnumber(),card.getValidity(), card.getCvv(),card.getDevice_id(),card.getPin(),card.getUsr_id()};
+			
 			QueryRunner run = new QueryRunner();
-			run.update(conn, "INSERT INTO cards(usr_id, cardholder,cardnumber,validity,cvv, device_id, PIN ) values(?,?,?,?,?,?,?)", card.getUsr_id(),card.getCardholder(),card.getCardnumber(),card.getValidity(), card.getCvv(),card.getDevice_id(),card.getPin());
+			Integer id = run.query(conn, "INSERT INTO cards(cardholder,cardnumber,validity,cvv, device_id, PIN,usr_id ) values(?,?,?,?,?,?,?) RETURNING card_id",h,params);
+			card.setCard_id(id);
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,6 +57,7 @@ public class CardDAO extends BaseDAO
 		{
 			DbUtils.closeQuietly(conn);
 		}
+		return card.getCard_id();
 	}
 	
 	private class CardListResultSetHandler implements ResultSetHandler<List<Card>>
@@ -59,13 +72,14 @@ public class CardDAO extends BaseDAO
 				//move data from the result set into card
 				
 				final Card card = new Card();
+				card.setCard_id(rs.getInt("card_id"));
 				card.setCardholder(rs.getString("cardholder"));
 				card.setCardnumber(rs.getString("cardnumber"));
 				card.setCvv(rs.getString("cvv"));
 				card.setDevice_id(rs.getString("device_id"));
 				card.setValidity(rs.getString("validity"));
-				card.setUsr_id(rs.getString("usr_id"));
 				card.setPin(rs.getString("pin"));
+				card.setUsr_id(rs.getInt("usr_id"));
 				
 				cards.add(card);
 			}

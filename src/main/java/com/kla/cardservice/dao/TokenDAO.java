@@ -4,6 +4,7 @@ import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,34 +29,44 @@ public class TokenDAO extends BaseDAO{
 	 */
 	public List <Token> getAllTokens ()
 	{
+		final String sql = "SELECT * FROM tokens ORDER BY date DESC";
 		Connection conn = null;
 		try{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
 			logger.debug("Running all tokens query");
-			return run.query(conn, "SELECT * FROM tokens ORDER BY date ASC", new TokenListResultSetHandler());
+			return run.query(conn, sql, new TokenListResultSetHandler());
 		}catch(SQLException | URISyntaxException e){
 			logger.error("error getting all tokens", e);
 			throw new RuntimeException("Could not query tokens",e);
 		}finally
 		{
 			DbUtils.closeQuietly(conn);
-		}
-			
+		}		
 	}
-		
-	
+			
 	/**
 	 * Saves a new token to database
 	 * @param token Token to store in database
 	 */
 	public void registerToken(Token token)
 	{
+		ResultSetHandler<Integer> h = new ResultSetHandler<Integer>() {
+		    public Integer handle(ResultSet rs) throws SQLException {
+		        if (!rs.next()) {
+		            return null;
+		        }
+		    
+		        return (Integer) rs.getObject(1);
+		    }
+		};
+		final String sql = "INSERT INTO tokens (tokenitem, date,usr_id, card_id,used) values(?,?,?,?,?) RETURNING token_id";
 		Connection conn = null;
+		Object[] params ={token.getTokenitem(),new Timestamp(token.getDate().getTime()),token.getUsr_id(),token.getCard_id(),token.isUsed()};
 		try{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			run.update(conn, "INSERT INTO tokens (usr_id, device_id,token,date ) values(?,?,?,?)", token.getUsr_id(),token.getDevice_id(),token.getToken(),token.getDate());
+			Integer id = run.query(conn, sql,h,params); 
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,9 +74,29 @@ public class TokenDAO extends BaseDAO{
 		{
 			DbUtils.closeQuietly(conn);
 		}
-		
 	}
 	
+	/**
+	 * Searches token table for a specific token
+	 * @param tokenID the tokenID to search for
+	 * @return token if found, null if not found
+	 */
+	public Token getTokenByID(String tokenID) {	
+		final String sql = "SELECT * FROM tokens WHERE token=?";
+		Connection conn = null;
+		try{
+			conn = getConnection();
+			QueryRunner run = new QueryRunner();
+			logger.debug("Running all tokens query");
+			return (Token) run.query(conn, sql, new TokenResultSetHandler(), tokenID);
+		}catch(SQLException | URISyntaxException e){
+			logger.error("error getting all tokens", e);
+			throw new RuntimeException("Could not query tokens",e);
+		}finally
+		{
+			DbUtils.closeQuietly(conn);
+		}		
+	}
 	
 	/**
 	 * Handler to return results from Select * from tokens query.  
@@ -85,11 +116,12 @@ public class TokenDAO extends BaseDAO{
 				//
 				// Process token data from database and insert into new token object
 				final Token token = new Token();
-				token.setUsr_id(rs.getString("usr_id"));
-				token.setDevice_id(rs.getString("device_id"));
-				token.setToken(rs.getString("token"));
-				token.setDate(rs.getString("date"));
-				
+				token.setToken_id(rs.getInt("token_id"));
+				token.setTokenitem(rs.getString("tokenitem"));
+				token.setDate(rs.getTimestamp("date"));
+				token.setUsr_id(rs.getInt("usr_id"));
+				token.setCard_id(rs.getInt("card_id"));
+				token.setUsed(rs.getBoolean("used"));
 				
 				//
 				// Add the processed token to the tokens list
@@ -97,6 +129,34 @@ public class TokenDAO extends BaseDAO{
 				
 			}
 			return tokens;
+		}
+		
+	}
+
+	private class TokenResultSetHandler implements ResultSetHandler<Token>
+	{
+
+		@Override
+		public Token handle(ResultSet rs) throws SQLException 
+		{
+
+			while( rs.next() )
+			{
+				//
+				// Process token data from database and insert into new token object
+				final Token token = new Token();
+				token.setToken_id(rs.getInt("token_id"));
+				token.setTokenitem(rs.getString("tokenitem"));
+				token.setDate(rs.getTimestamp("date"));
+				token.setUsr_id(rs.getInt("usr_id"));
+				token.setCard_id(rs.getInt("card_id"));
+				token.setUsed(rs.getBoolean("used"));
+				
+				
+				return token;
+				
+			}
+			return null;
 		}
 		
 	}

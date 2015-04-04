@@ -5,7 +5,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Card 
 {
-	private String usr_id;
+	private int card_id;
+	
+	private int usr_id;
 	
 	private String cardholder;
 
@@ -43,11 +45,11 @@ public class Card
 		this.cardnumber = cardnumber;
 	}
 
-	public String getUsr_id() {
+	public int getUsr_id() {
 		return usr_id;
 	}
 
-	public void setUsr_id(String usr_id) {
+	public void setUsr_id(int usr_id) {
 		this.usr_id = usr_id;
 	}
 
@@ -73,6 +75,14 @@ public class Card
 
 	public void setDevice_id(String device_id) {
 		this.device_id = device_id;
+	}
+
+	public int getCard_id() {
+		return card_id;
+	}
+
+	public void setCard_id(int card_id) {
+		this.card_id = card_id;
 	}
 	
 }

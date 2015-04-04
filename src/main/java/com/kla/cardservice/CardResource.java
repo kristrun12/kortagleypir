@@ -8,8 +8,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 import com.kla.cardservice.dao.CardDAO;
 import com.kla.cardservice.data.Card;
+import com.kla.cardservice.data.User;
 
 
 @Path("/card")
@@ -41,6 +43,7 @@ public class CardResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Card registerCard(Card newCard)
 	{
+	
 		new CardDAO().registerCard(newCard);
 		return newCard;
 	}

@@ -1,12 +1,14 @@
 package com.kla.cardservice;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.jetty.util.StringUtil;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
@@ -37,9 +39,10 @@ public class UserResourceTest extends JerseyTest {
     @Test
     public void testUserPost() {
     	User user = new User();
+    	user.setUsr_id(85);
     	user.setName("Bella Beenno");
     	user.setSsn("12345432");
-    	user.setDevice_id("00");
+    	user.setDevice_id(UUID.randomUUID().toString());
     	
     	
         final Response responseMsg = target().path("user").request().post(Entity.entity(user, MediaType.APPLICATION_JSON));
