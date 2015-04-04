@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.kla.cardservice.dao.CardDAO;
+import com.kla.cardservice.dao.UserDAO;
 import com.kla.cardservice.data.Card;
 import com.kla.cardservice.data.User;
 
@@ -44,7 +45,9 @@ public class CardResource {
 	public Card registerCard(Card newCard)
 	{
 	
-		new CardDAO().registerCard(newCard);
+		int card_id = new CardDAO().registerCard(newCard);
+	
+		newCard.setCard_id(card_id);
 		return newCard;
 	}
 

@@ -42,7 +42,6 @@ public class BaseDAO {
 				//stmt.executeUpdate("DROP TABLE IF EXISTS mainCard");
 				//stmt.executeUpdate("DROP TABLE IF EXISTS extraCard");
 				//stmt.executeUpdate("DROP TABLE IF EXISTS spareCard");
-				//stmt.ececuteUpdate("DROP TABLE IF EXISTS tokenToCard");
 				
 				
 			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users "
