@@ -142,7 +142,6 @@ public class TokenDAO extends BaseDAO{
 				token.setDate(rs.getTimestamp("date"));
 				token.setUsr_id(rs.getInt("usr_id"));
 				token.setCard_id(rs.getInt("card_id"));
-				token.setDevice_id(rs.getString("device_id"));
 				token.setUsed(rs.getBoolean("used"));
 				
 				//

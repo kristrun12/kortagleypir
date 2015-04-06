@@ -2,7 +2,7 @@
 <button class="btn" ng-click="loadData()">Reload data</button>
 <input ng-model="queryFilter" placeholder="Text to filter"></input>
 <table class="table table-condensed table-striped">
-<thead><th>#</th><th>token_id</th><th>tokenitem</th><th>date</th><th>usr_id</th><th>card_id</th><th>device_id</th><th>used</th>
+<thead><th>#</th><th>token_id</th><th>tokenitem</th><th>date</th><th>usr_id</th><th>card_id</th>><th>used</th>
 </thead>
 <tbody>
 	<tr ng-repeat="token in tokens | filter:queryFilter"> 
@@ -12,7 +12,6 @@
 		<td>{{token.date | date : "dd.MM.yyyy HH:mm:ss.sss"}}</td>
 		<td>{{token.usr_id}}</td>
 		<td>{{token.card_id}}</td>
-		<td>{{token.device_id}}</td>
 		<td>{{token.used}}</td>				
 	</tr>
 </tbody>
