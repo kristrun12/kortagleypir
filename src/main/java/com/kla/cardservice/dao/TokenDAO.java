@@ -49,7 +49,7 @@ public class TokenDAO extends BaseDAO{
 	 * Saves a new token to database
 	 * @param token Token to store in database
 	 */
-	public void registerToken(Token token)
+	public int registerToken(Token token)
 	{
 		ResultSetHandler<Integer> h = new ResultSetHandler<Integer>() {
 		    public Integer handle(ResultSet rs) throws SQLException {
@@ -60,6 +60,7 @@ public class TokenDAO extends BaseDAO{
 		        return (Integer) rs.getObject(1);
 		    }
 		};
+	//	token.setUsed(true);
 		final String sql = "INSERT INTO tokens (tokenitem, date,usr_id, card_id,used) values(?,?,?,?,?) RETURNING token_id";
 		Connection conn = null;
 		Object[] params ={token.getTokenitem(),new Timestamp(token.getDate().getTime()),token.getUsr_id(),token.getCard_id(),token.isUsed()};
@@ -67,6 +68,7 @@ public class TokenDAO extends BaseDAO{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
 			Integer id = run.query(conn, sql,h,params); 
+			token.setToken_id(id);
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,6 +76,7 @@ public class TokenDAO extends BaseDAO{
 		{
 			DbUtils.closeQuietly(conn);
 		}
+		return token.getToken_id();
 	}
 	
 	/**
@@ -81,14 +84,15 @@ public class TokenDAO extends BaseDAO{
 	 * @param tokenID the tokenID to search for
 	 * @return token if found, null if not found
 	 */
-	public Token getTokenByID(String tokenID) {	
-		final String sql = "SELECT * FROM tokens WHERE token=?";
+	public Token getTokenByID(String tokenitem) {	
+		final String sql = "SELECT * FROM tokens WHERE tokenitem=?";
 		Connection conn = null;
 		try{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
 			logger.debug("Running all tokens query");
-			return (Token) run.query(conn, sql, new TokenResultSetHandler(), tokenID);
+			
+			return (Token) run.query(conn, sql, new TokenResultSetHandler(), tokenitem);
 		}catch(SQLException | URISyntaxException e){
 			logger.error("error getting all tokens", e);
 			throw new RuntimeException("Could not query tokens",e);
@@ -97,7 +101,24 @@ public class TokenDAO extends BaseDAO{
 			DbUtils.closeQuietly(conn);
 		}		
 	}
-	
+	public void setTokenAsUsed(Token t)
+	{
+		final String sql = "UPDATE tokens SET used=? WHERE token_id=?";
+		Connection conn = null;
+		try{
+			conn = getConnection();
+			QueryRunner run = new QueryRunner();
+			logger.debug("Running all tokens query");
+		
+			 run.update(conn, sql, true, t.getToken_id());
+		}catch(SQLException | URISyntaxException e){
+			logger.error("error getting all tokens", e);
+			throw new RuntimeException("Could not query tokens",e);
+		}finally
+		{
+			DbUtils.closeQuietly(conn);
+		}		
+	}
 	/**
 	 * Handler to return results from Select * from tokens query.  
 	 * @author kla

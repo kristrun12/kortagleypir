@@ -34,12 +34,12 @@ public class TransactionResourceTest extends JerseyTest{
     public void testMain() {
     	
     	Transaction transaction = new Transaction();
-    	transaction.setCardname("spareCard");
-    	transaction.setCardnumber("4569852174128523");
-    	transaction.setDate("Mon Mar 30 15:04:12 GMT 2015");
-    	transaction.setPrize("5000");
-    	transaction.setTotal("150000");
+    	
+    	transaction.setAppPin("4522");
+    	transaction.setPrice(5000);
+    	transaction.setTotal(150000);
     	transaction.setVendor("Kostur");
+    	transaction.setToken_id(3);
     	
     	
         final Response responseMsg = target().path("transaction").request().post(Entity.entity(transaction, MediaType.APPLICATION_JSON));

@@ -31,9 +31,10 @@ public class TokenResource{
 	public Token createToken(Token newToken)
 	{		
 			newToken.setTokenitem(UUID.randomUUID().toString());
-		
+			
 			newToken.setDate(new Date());
-			new TokenDAO().registerToken(newToken);
+			
+			int id = new TokenDAO().registerToken(newToken);
 		
 		return newToken;
 	}

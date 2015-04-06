@@ -4,80 +4,56 @@ import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
-import com.kla.cardservice.data.Card;
+
 import com.kla.cardservice.data.Transaction;
-import com.kla.cardservice.data.User;
 
 public class TransactionDAO extends BaseDAO{
 	
-	public List<Transaction> getAllMainTransactions()
+	public List<Transaction> getAllTransactions()
 	{
-	
 		Connection conn = null;
 		try{
 			
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			return run.query(conn, "SELECT * FROM mainCard", new mainCardListResultSetHandler());
+			return run.query(conn, "SELECT * FROM transactions", new CardListResultSetHandler());
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new RuntimeException("Could not query mainCard", e);
-		}finally
-		{
-			DbUtils.closeQuietly(conn);
-		}
-	}
-	public List<Transaction> getAllExtraTransactions()
-	{
-	
-		Connection conn = null;
-		try{
-			
-			conn = getConnection();
-			QueryRunner run = new QueryRunner();
-			return run.query(conn, "SELECT * FROM ExtraCard", new extraCardListResultSetHandler());
-		} catch (SQLException | URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("Could not query extraCard", e);
-		}finally
-		{
-			DbUtils.closeQuietly(conn);
-		}
-	}
-	public List<Transaction> getAllSpareTransactions()
-	{
-	
-		Connection conn = null;
-		try{
-			
-			conn = getConnection();
-			QueryRunner run = new QueryRunner();
-			return run.query(conn, "SELECT * FROM spareCard", new spareCardListResultSetHandler());
-		} catch (SQLException | URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("Could not query extraCard", e);
+			throw new RuntimeException("Could not query transactions", e);
 		}finally
 		{
 			DbUtils.closeQuietly(conn);
 		}
 	}
 	
-	public void registerMainTransaction(Transaction transaction)
+	public int registerTransaction(Transaction trans)
 	{
+		ResultSetHandler<Integer> h = new ResultSetHandler<Integer>() {
+		    public Integer handle(ResultSet rs) throws SQLException {
+		        if (!rs.next()) {
+		            return null;
+		        }
+		    
+		        return (Integer) rs.getObject(1);
+		    }
+		};
 		Connection conn = null;
 		try{
 			conn = getConnection();
+			Object[] params ={trans.getVendor(),trans.getPrice(),trans.getTotal(),new Timestamp(trans.getDate().getTime()),trans.getCard_id(),trans.getDevice_id(),trans.getTokenitem(),trans.getAppPin(),trans.getPosPin(),trans.getToken_id()};
+			final String sql = "INSERT INTO transactions (vendor, price,total,date, card_id,device_id,tokenitem,appPin,posPin,token_id) values(?,?,?,?,?,?,?,?,?,?) RETURNING transaction_id";
 			QueryRunner run = new QueryRunner();
-			run.update(conn, "INSERT INTO mainCard(cardnumber, vendor, prize,total,date ) values(?,?,?,?,?)",transaction.getCardnumber(),transaction.getVendor(),transaction.getPrize(),transaction.getTotal(),transaction.getDate());
+			Integer id = run.query(conn, sql,h,params);
+			trans.setTransaction_id(id);
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,39 +61,10 @@ public class TransactionDAO extends BaseDAO{
 		{
 			DbUtils.closeQuietly(conn);
 		}
+		return trans.getTransaction_id();
 	}
 	
-	public void registerExtraTransaction(Transaction transaction)
-	{
-		Connection conn = null;
-		try{
-			conn = getConnection();
-			QueryRunner run = new QueryRunner();
-			run.update(conn, "INSERT INTO ExtraCard(cardnumber, vendor, prize,total,date ) values(?,?,?,?,?)",transaction.getCardnumber(),transaction.getVendor(),transaction.getPrize(),transaction.getTotal(),transaction.getDate());
-		} catch (SQLException | URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally
-		{
-			DbUtils.closeQuietly(conn);
-		}
-	}
-	public void registerSpareTransaction(Transaction transaction)
-	{
-		Connection conn = null;
-		try{
-			conn = getConnection();
-			QueryRunner run = new QueryRunner();
-			run.update(conn, "INSERT INTO spareCard(cardnumber, vendor, prize,total,date ) values(?,?,?,?,?)",transaction.getCardnumber(),transaction.getVendor(),transaction.getPrize(),transaction.getTotal(),transaction.getDate());
-		} catch (SQLException | URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally
-		{
-			DbUtils.closeQuietly(conn);
-		}
-	}
-	private class mainCardListResultSetHandler implements ResultSetHandler<List<Transaction>>
+	private class CardListResultSetHandler implements ResultSetHandler<List<Transaction>>
 	{
 	
 		@Override
@@ -129,68 +76,23 @@ public class TransactionDAO extends BaseDAO{
 				//move data from the result set into card
 				
 				final Transaction transaction = new Transaction();
-				transaction.setCardnumber(rs.getString("cardnumber"));
+				transaction.setTransaction_id(rs.getInt("transaction_id"));
 				transaction.setVendor(rs.getString("vendor"));
-				transaction.setPrize(rs.getString("prize"));
-				transaction.setTotal(rs.getString("total"));
-				transaction.setDate(rs.getString("date"));
-				
+				transaction.setPrice(rs.getInt("price"));
+				transaction.setTotal(rs.getInt("total"));
+				transaction.setDate(rs.getTimestamp("date"));
+				transaction.setAppPin(rs.getString("appPin"));
+				transaction.setCard_id(rs.getInt("card_id"));
+				transaction.setToken_id(rs.getInt("token_id"));
+				transaction.setTokenitem(rs.getString("tokenitem"));
+				transaction.setPosPin(rs.getString("posPIn"));
+				transaction.setDevice_id(rs.getString("device_id"));
+			    
 				transactions.add(transaction);
 				
 			}
 		
 			return transactions;
 		}
-		}
-	private class extraCardListResultSetHandler implements ResultSetHandler<List<Transaction>>
-	{
-	
-		@Override
-		public List<Transaction> handle (ResultSet rs) throws SQLException
-		{
-			final List <Transaction> transactions = new ArrayList<Transaction>();
-			while(rs.next())
-			{
-				//move data from the result set into card
-				
-				final Transaction transaction = new Transaction();
-				transaction.setCardnumber(rs.getString("cardnumber"));
-				transaction.setVendor(rs.getString("vendor"));
-				transaction.setPrize(rs.getString("prize"));
-				transaction.setTotal(rs.getString("total"));
-				transaction.setDate(rs.getString("date"));
-				
-				transactions.add(transaction);
-				
-			}
-		
-			return transactions;
-		}
-		}
-	private class spareCardListResultSetHandler implements ResultSetHandler<List<Transaction>>
-	{
-	
-		@Override
-		public List<Transaction> handle (ResultSet rs) throws SQLException
-		{
-			final List <Transaction> transactions = new ArrayList<Transaction>();
-			while(rs.next())
-			{
-				//move data from the result set into card
-				
-				final Transaction transaction = new Transaction();
-				transaction.setCardnumber(rs.getString("cardnumber"));
-				transaction.setVendor(rs.getString("vendor"));
-				transaction.setPrize(rs.getString("prize"));
-				transaction.setTotal(rs.getString("total"));
-				transaction.setDate(rs.getString("date"));
-				
-				transactions.add(transaction);
-				
-			}
-		
-			return transactions;
-		}
-		}
-
+	}
 }

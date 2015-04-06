@@ -1,0 +1,27 @@
+<div  ng-controller="transactionController"> 
+<button class="btn" ng-click="loadData()">Reload data</button>
+<input ng-model="queryFilter" placeholder="Text to filter"></input>
+<table class="table table-condensed table-striped">
+<thead>
+	<th>#</th><th>transaction_id</th><th>vendor</th><th>price</th><th>total</th><th>date</th>
+	<th>card_id</th><th>device_id</th><th>tokenitem</th><th>apppin</th><th>pospin</th><th>token_id</th>
+</thead>
+<tbody>
+	<tr ng-repeat="transaction in transactions | filter:queryFilter"> 
+		<td>{{$index+1}}</td>
+		<td>{{transaction.transaction_id}}</td>
+		<td>{{transaction.vendor}}</td>
+		<td>{{transaction.price}}</td>
+		<td>{{transaction.total}}</td>
+		<td>{{transaction.date | date : "dd.MM.yyyy HH:mm:ss.sss"}}</td>
+		<td>{{transaction.card_id}}</td>
+		<td>{{transaction.device_id}}</td>
+		<td>{{transaction.tokenitem}}</td>
+		<td>{{transaction.apppin}}</td>
+		<td>{{transaction.pospin}}</td>
+		<td>{{transaction.token_id}}</td>
+	</tr>
+</tbody>
+</table>
+</div>
+  

@@ -1,5 +1,5 @@
 package com.kla.cardservice;
-import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.ws.rs.client.Entity;
@@ -7,7 +7,6 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.glassfish.jersey.client.ClientResponse;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Assert;
@@ -15,6 +14,7 @@ import org.junit.Test;
 
 import com.kla.cardservice.data.Card;
 import com.kla.cardservice.data.Token;
+import com.kla.cardservice.data.Transaction;
 import com.kla.cardservice.data.User;
 
 
@@ -24,7 +24,7 @@ public class TestAppResource extends JerseyTest {
     protected Application configure() {
     	
     	
-        return new ResourceConfig(UserResource.class,CardResource.class,TokenResource.class);
+        return new ResourceConfig(UserResource.class,CardResource.class,TokenResource.class,TransactionResource.class);
     }
 	 
 	@Test
@@ -75,13 +75,37 @@ public class TestAppResource extends JerseyTest {
 		token.setUsr_id(createdUser.getUsr_id());
 		token.setCard_id(createdCard.getCard_id());
 		
-		//token.isUsed();
 
-		final Response responseMsgT = target().path("token").request()
-				.post(Entity.entity(token, MediaType.APPLICATION_JSON));
+		final Response responseCreateToken = target().path("token").request()
+				.post(Entity.entity(token,MediaType.APPLICATION_JSON));
+		final Token createdToken = responseCreateToken.readEntity(Token.class);
 
 		System.out.println(responseCreateUser.getClass().getName());
-		System.out.println(responseCreateUser);
+		//System.out.println(responseCreateUser);
+		
+		Transaction trans = new Transaction();
+		
+		
+		trans.setVendor("Bonus");
+		trans.setPrice(new Random().nextInt(10000)+500);
+		trans.setPosPin("4523");
+		trans.setAppPin("7895");
+		trans.setCard_id(createdCard.getCard_id());
+		trans.setDevice_id(createdUser.getDevice_id());
+		trans.setTokenitem(createdToken.getTokenitem());
+		
+		final Response responseCreateTransaction = target().path("transaction").request()
+				.post(Entity.entity(trans,MediaType.APPLICATION_JSON));
+		
+		Assert.assertEquals(200, responseCreateTransaction.getStatus());
+		final Transaction createdTrans = responseCreateTransaction.readEntity(Transaction.class);
+		
+		//try again with the same token
+		final Response responseTransactionFail = target().path("transaction").request()
+				.post(Entity.entity(trans,MediaType.APPLICATION_JSON));
+		System.out.println(responseTransactionFail.readEntity(String.class));
+		Assert.assertEquals(400, responseTransactionFail.getStatus());
+		
 	}
 	    
 

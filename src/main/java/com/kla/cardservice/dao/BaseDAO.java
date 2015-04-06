@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.Properties;
 
 public class BaseDAO {
@@ -36,12 +37,13 @@ public class BaseDAO {
 			try (Connection conn = getConnection();){
 					
 				Statement stmt = conn.createStatement();
-				stmt.executeUpdate("DROP TABLE IF EXISTS users");
-				stmt.executeUpdate("DROP TABLE IF EXISTS cards");
+				stmt.executeUpdate("DROP TABLE IF EXISTS transactions");
 				stmt.executeUpdate("DROP TABLE IF EXISTS tokens");
-				//stmt.executeUpdate("DROP TABLE IF EXISTS mainCard");
-				//stmt.executeUpdate("DROP TABLE IF EXISTS extraCard");
-				//stmt.executeUpdate("DROP TABLE IF EXISTS spareCard");
+				stmt.executeUpdate("DROP TABLE IF EXISTS cards");
+				stmt.executeUpdate("DROP TABLE IF EXISTS users");
+				stmt.executeUpdate("DROP TABLE IF EXISTS mainCard");
+				stmt.executeUpdate("DROP TABLE IF EXISTS extraCard");
+				stmt.executeUpdate("DROP TABLE IF EXISTS spareCard");
 				
 				
 			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users "
@@ -71,12 +73,27 @@ public class BaseDAO {
 			    		+ "foreign key (usr_id) references users(usr_id),"
 			    		+ "foreign key (card_id) references cards (card_id))");
 			    
+			    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS transactions("
+			    		+ "transaction_id serial PRIMARY KEY,"
+			    		+ "vendor varchar (255),"
+			    		+ "price integer,"
+			    		+ "total integer,"
+			    		+ "date varchar (255),"
+			    		+ "card_id int,"
+			    		+ "device_id varchar (255),"
+			    		+ "tokenitem varchar (255),"
+			    		+ "appPin varchar (255),"
+			    		+ "posPin varchar (255),"
+			    		+ "token_id integer,"
+			    		+ "foreign key (token_id) references tokens (token_id),"
+			    		+ "foreign key (card_id) references cards (card_id))");
+			    
+			    
 			    stmt.executeUpdate("DROP INDEX IF EXISTS idx_tokenitem");
 			    stmt.executeUpdate("CREATE INDEX idx_tokenitem ON tokens (tokenitem)");
-			    //stmt.executeUpdate("CREATE TABLE IF NOT EXISTS mainCard(cardnumber varchar (255), vendor varchar (255), prize varchar(255), total varchar(255),date varchar (255))");
-			    //stmt.executeUpdate("CREATE TABLE IF NOT EXISTS extraCard(cardnumber varchar (255), vendor varchar (255), prize varchar(255), total varchar(255),date varchar (255))");
-			    //stmt.executeUpdate("CREATE TABLE IF NOT EXISTS spareCard(cardnumber varchar (255), vendor varchar (255), prize varchar(255), total varchar(255),date varchar (255))");
-			    //stmt.executeUpdate("CREATE TABLE IF NOT EXISTS tokenToCard(cardnumber varchar (255), total varchar(255))");
+			    stmt.executeUpdate("DROP INDEX IF EXISTS idx_transaction");
+			    stmt.executeUpdate("CREATE INDEX idx_transaction ON transactions (transaction_id)");
+			    
 				
 			} catch (URISyntaxException e) {
 				// TODO Auto-generated catch block
