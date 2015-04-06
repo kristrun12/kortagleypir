@@ -71,6 +71,7 @@ public class TransactionResource {
 		}
 		trans.setDate(new Date());
 		trans.setToken_id(t.getToken_id());
+		trans.setCard_id(t.getCard_id());
 		
 		new TokenDAO().setTokenAsUsed(t);
 		int transId = new TransactionDAO().registerTransaction(trans);

@@ -86,13 +86,13 @@ public class TestAppResource extends JerseyTest {
 		Transaction trans = new Transaction();
 		
 		
-		trans.setVendor("Bonus");
-		trans.setPrice(new Random().nextInt(10000)+500);
-		trans.setPosPin("4523");
-		trans.setAppPin("7895");
-		trans.setCard_id(createdCard.getCard_id());
-		trans.setDevice_id(createdUser.getDevice_id());
 		trans.setTokenitem(createdToken.getTokenitem());
+		trans.setAppPin("7895");
+		trans.setDevice_id(createdUser.getDevice_id());
+		trans.setPrice(new Random().nextInt(10000)+500);
+		trans.setVendor("Bonus");
+		trans.setPosPin("4523");
+		//trans.setCard_id(createdCard.getCard_id());
 		
 		final Response responseCreateTransaction = target().path("transaction").request()
 				.post(Entity.entity(trans,MediaType.APPLICATION_JSON));
