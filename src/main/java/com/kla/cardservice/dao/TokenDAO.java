@@ -8,9 +8,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response.Status;
-
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
@@ -41,7 +38,7 @@ public class TokenDAO extends BaseDAO{
 			return run.query(conn, sql, new TokenListResultSetHandler());
 		}catch(SQLException | URISyntaxException e){
 			logger.error("error getting all tokens", e);
-			throw new WebApplicationException(e.getMessage(),Status.BAD_REQUEST);
+			throw new RuntimeException("Could not query tokens "+e.getMessage(),e);
 		}finally
 		{
 			DbUtils.closeQuietly(conn);

@@ -10,7 +10,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.Status;
 
 import com.kla.cardservice.dao.TokenDAO;
 import com.kla.cardservice.data.Token;
@@ -44,7 +46,12 @@ public class TokenResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Token> getAllTokens()
 	{
-		return new TokenDAO().getAllTokens();	
+		try{
+			return new TokenDAO().getAllTokens();
+		}catch(Exception ex)
+		{
+			throw new WebApplicationException("Failed with "+ex.getMessage(),Status.BAD_REQUEST);
+		}
 	}
 	
 	@GET()
