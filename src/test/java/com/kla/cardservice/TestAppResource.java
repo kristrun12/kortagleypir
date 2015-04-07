@@ -1,4 +1,5 @@
 package com.kla.cardservice;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -106,6 +107,17 @@ public class TestAppResource extends JerseyTest {
 		System.out.println(responseTransactionFail.readEntity(String.class));
 		Assert.assertEquals(400, responseTransactionFail.getStatus());
 		
+		
+		//get all transactions for the current card
+		final Response responseTransactionByCard = target().path("transaction").path("all").path(String.valueOf(createdCard.getCard_id())).request()
+				.get();
+		
+		Assert.assertEquals(200, responseTransactionByCard.getStatus());
+		
+		List <Transaction> cardTransactions = responseTransactionByCard.readEntity(List.class);
+		System.out.println(cardTransactions);
+		
+		Assert.assertEquals(1,cardTransactions.size());
 	}
 	    
 

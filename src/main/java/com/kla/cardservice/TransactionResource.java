@@ -38,21 +38,21 @@ public class TransactionResource {
 		return new TransactionDAO().getAllTransactions();
 		
 	}
-	/*@GET()
-	@Path("/{card_id}")
+	@GET()
+	@Path("/all/{card_id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Token getToken(@PathParam("card_id")String card_id)
+	public List<Transaction> getTransactionsByCardID(@PathParam("card_id")int card_id)
 	{
 		try{
 			System.out.println("Finding "+card_id);
-			return new Transaction().getTransactionByCardID(card_id);
+			return new TransactionDAO().getTransactionsByCardID(card_id);
 		
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
 			return null;
 		}
-	}*/
+	}
 	
 	@POST()
 	@Consumes(MediaType.APPLICATION_JSON)

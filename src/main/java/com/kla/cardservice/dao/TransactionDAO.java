@@ -24,7 +24,7 @@ public class TransactionDAO extends BaseDAO{
 			
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			return run.query(conn, "SELECT * FROM transactions", new CardListResultSetHandler());
+			return run.query(conn, "SELECT * FROM transactions", new TransactionsListResultSetHandler());
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,8 +63,24 @@ public class TransactionDAO extends BaseDAO{
 		}
 		return trans.getTransaction_id();
 	}
-	
-	private class CardListResultSetHandler implements ResultSetHandler<List<Transaction>>
+	public List <Transaction> getTransactionsByCardID(int card_id)
+	{
+		Connection conn = null;
+		try{
+			
+			conn = getConnection();
+			QueryRunner run = new QueryRunner();
+			return run.query(conn, "SELECT * FROM transactions where card_id=?", new TransactionsListResultSetHandler(),card_id);
+		} catch (SQLException | URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException("Could not query transactions", e);
+		}finally
+		{
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	private class TransactionsListResultSetHandler implements ResultSetHandler<List<Transaction>>
 	{
 	
 		@Override
