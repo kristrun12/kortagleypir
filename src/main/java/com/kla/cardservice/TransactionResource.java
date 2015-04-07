@@ -15,10 +15,9 @@ import javax.ws.rs.core.Response.Status;
 import com.kla.cardservice.dao.CardDAO;
 import com.kla.cardservice.dao.TokenDAO;
 import com.kla.cardservice.dao.TransactionDAO;
-import com.kla.cardservice.dao.UserDAO;
+import com.kla.cardservice.data.Card;
 import com.kla.cardservice.data.Token;
 import com.kla.cardservice.data.Transaction;
-import com.kla.cardservice.data.User;
 import com.kla.cardservice.exceptions.TransactionException;
 
 @Path("/transaction")
@@ -69,10 +68,21 @@ public class TransactionResource {
 		{
 			throw new TransactionException("Invalid token", Status.BAD_REQUEST);
 		}
+		
+		//check Card balance
+		Card c = new CardDAO().getCardByID(t.getCard_id());
+		if(c.getBalance() - trans.getPrice() < 0)
+		{
+			throw new TransactionException("Insufficient funds", Status.BAD_REQUEST);
+		}
+		
+		//ok go ahead with the transaction
+		
 		trans.setDate(new Date());
 		trans.setToken_id(t.getToken_id());
 		trans.setCard_id(t.getCard_id());
-		
+		//set the balance
+		new CardDAO().changeBalance(-trans.getPrice(),c.getCard_id());
 		new TokenDAO().setTokenAsUsed(t);
 		int transId = new TransactionDAO().registerTransaction(trans);
 		trans.setTransaction_id(transId);

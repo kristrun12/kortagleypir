@@ -49,8 +49,8 @@ public class TransactionDAO extends BaseDAO{
 		Connection conn = null;
 		try{
 			conn = getConnection();
-			Object[] params ={trans.getVendor(),trans.getPrice(),trans.getTotal(),new Timestamp(trans.getDate().getTime()),trans.getCard_id(),trans.getDevice_id(),trans.getTokenitem(),trans.getAppPin(),trans.getPosPin(),trans.getToken_id()};
-			final String sql = "INSERT INTO transactions (vendor, price,total,date, card_id,device_id,tokenitem,appPin,posPin,token_id) values(?,?,?,?,?,?,?,?,?,?) RETURNING transaction_id";
+			Object[] params ={trans.getVendor(),trans.getPrice(),new Timestamp(trans.getDate().getTime()),trans.getCard_id(),trans.getDevice_id(),trans.getTokenitem(),trans.getAppPin(),trans.getPosPin(),trans.getToken_id()};
+			final String sql = "INSERT INTO transactions (vendor, price,date, card_id,device_id,tokenitem,appPin,posPin,token_id) values(?,?,?,?,?,?,?,?,?) RETURNING transaction_id";
 			QueryRunner run = new QueryRunner();
 			Integer id = run.query(conn, sql,h,params);
 			trans.setTransaction_id(id);
@@ -95,7 +95,6 @@ public class TransactionDAO extends BaseDAO{
 				transaction.setTransaction_id(rs.getInt("transaction_id"));
 				transaction.setVendor(rs.getString("vendor"));
 				transaction.setPrice(rs.getInt("price"));
-				transaction.setTotal(rs.getInt("total"));
 				transaction.setDate(rs.getTimestamp("date"));
 				transaction.setAppPin(rs.getString("appPin"));
 				transaction.setCard_id(rs.getInt("card_id"));

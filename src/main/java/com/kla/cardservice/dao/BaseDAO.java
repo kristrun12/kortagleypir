@@ -58,6 +58,7 @@ public class BaseDAO {
 			    		+ "cvv varchar(255),"
 			    		+ "device_id varchar(255),"
 			    		+ "pin varchar (255),"
+			    		+ "balance int,"
 			    		+ "usr_id integer, foreign key (usr_id) references users(usr_id))");
 			    
 			    
@@ -75,7 +76,6 @@ public class BaseDAO {
 			    		+ "transaction_id serial PRIMARY KEY,"
 			    		+ "vendor varchar (255),"
 			    		+ "price integer,"
-			    		+ "total integer,"
 			    		+ "date varchar (255),"
 			    		+ "card_id int,"
 			    		+ "device_id varchar (255),"

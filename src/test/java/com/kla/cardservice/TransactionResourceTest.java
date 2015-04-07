@@ -37,7 +37,6 @@ public class TransactionResourceTest extends JerseyTest{
     	
     	transaction.setAppPin("4522");
     	transaction.setPrice(5000);
-    	transaction.setTotal(150000);
     	transaction.setVendor("Kostur");
     	transaction.setToken_id(3);
     	
