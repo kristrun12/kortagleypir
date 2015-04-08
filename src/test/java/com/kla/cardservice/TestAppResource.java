@@ -118,6 +118,12 @@ public class TestAppResource extends JerseyTest {
 		System.out.println(cardTransactions);
 		
 		Assert.assertEquals(1,cardTransactions.size());
+		
+		//get the lowest balance of a card
+		final Response responseGetCardBalance = target().path("card").path("balance").path(String.valueOf(createdCard.getCard_id())).request().get();
+		Integer cardBalance = responseGetCardBalance.readEntity(Integer.class);
+		Assert.assertEquals(200, responseGetCardBalance.getStatus());
+		System.out.println("the end " + cardBalance);
 	}
 	    
 
