@@ -24,7 +24,7 @@ public class TransactionDAO extends BaseDAO{
 			
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			return run.query(conn, "SELECT * FROM transactions", new TransactionsListResultSetHandler());
+			return run.query(conn, "SELECT * FROM transactions ORDER BY date DESC" , new TransactionsListResultSetHandler());
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
