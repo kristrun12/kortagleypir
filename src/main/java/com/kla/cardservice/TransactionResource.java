@@ -66,16 +66,21 @@ public class TransactionResource {
 		
 		if(t == null || t.isUsed())
 		{
-			throw new TransactionException("Invalid token", Status.BAD_REQUEST);
+			throw new TransactionException("Ógilt kort, færslu hafnað", Status.BAD_REQUEST);
 		}
-		if(trans.getPrice()< 1){
-			throw new TransactionException("Price must be larger than zero", Status.BAD_REQUEST);
+		
+		//
+		// Check transaction
+		if(trans.getPrice()< 1)
+		{
+			throw new TransactionException("Verðið verður að vera hærra en núll", Status.BAD_REQUEST);
 		}
+		
 		//check Card balance
 		Card c = new CardDAO().getCardByID(t.getCard_id());
 		if(c.getBalance() - trans.getPrice() < 0)
 		{
-			throw new TransactionException("Insufficient funds", Status.BAD_REQUEST);
+			throw new TransactionException("Ekki næg innistæða", Status.BAD_REQUEST);
 		}
 		
 		//ok go ahead with the transaction
