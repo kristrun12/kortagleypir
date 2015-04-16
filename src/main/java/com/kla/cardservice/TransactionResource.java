@@ -68,7 +68,9 @@ public class TransactionResource {
 		{
 			throw new TransactionException("Invalid token", Status.BAD_REQUEST);
 		}
-		
+		if(trans.getPrice()< 1){
+			throw new TransactionException("Price must be larger than zero", Status.BAD_REQUEST);
+		}
 		//check Card balance
 		Card c = new CardDAO().getCardByID(t.getCard_id());
 		if(c.getBalance() - trans.getPrice() < 0)
