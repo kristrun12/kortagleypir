@@ -39,7 +39,7 @@ public class TransactionResource {
 	}
 	@GET()
 	@Path("/all/{card_id}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<Transaction> getTransactionsByCardID(@PathParam("card_id")int card_id)
 	{
 		try{
