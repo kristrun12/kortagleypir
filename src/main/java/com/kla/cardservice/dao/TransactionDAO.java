@@ -70,7 +70,7 @@ public class TransactionDAO extends BaseDAO{
 			
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			return run.query(conn, "SELECT * FROM transactions where card_id=?", new TransactionsListResultSetHandler(),card_id);
+			return run.query(conn, "SELECT * FROM transactions where card_id=? ORDER BY date DESC", new TransactionsListResultSetHandler(),card_id);
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

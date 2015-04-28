@@ -48,8 +48,8 @@ public class CardResource {
 			System.out.println("Finding balance "+card_id);
 			
 			//get the information about the card
-			Card c = new Card();
-			c = new CardDAO().getCardByID(card_id);
+			
+			Card c = new CardDAO().getCardByID(card_id);
 			//return balance to user
 			 
 			return c.getBalance();
