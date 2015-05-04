@@ -23,7 +23,7 @@ public class CardDAO extends BaseDAO
 		try{
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			return run.query(conn,"SELECT * FROM cards", new CardListResultSetHandler());
+			return run.query(conn,"SELECT * FROM cards ORDER BY card_id DESC", new CardListResultSetHandler());
 		}catch (SQLException | URISyntaxException e){
 			e.printStackTrace();
 			throw new RuntimeException("Could not query cards",e);

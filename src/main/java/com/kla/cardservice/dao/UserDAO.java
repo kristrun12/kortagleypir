@@ -23,7 +23,7 @@ public class UserDAO extends BaseDAO{
 			
 			conn = getConnection();
 			QueryRunner run = new QueryRunner();
-			return run.query(conn, "SELECT * FROM users", new UserListResultSetHandler());
+			return run.query(conn, "SELECT * FROM users ORDER BY user_id DESC", new UserListResultSetHandler());
 		} catch (SQLException | URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
