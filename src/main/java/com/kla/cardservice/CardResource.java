@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.Status;
 
 import com.kla.cardservice.dao.CardDAO;
 import com.kla.cardservice.dao.TransactionDAO;
@@ -16,6 +17,8 @@ import com.kla.cardservice.dao.UserDAO;
 import com.kla.cardservice.data.Card;
 import com.kla.cardservice.data.Transaction;
 import com.kla.cardservice.data.User;
+import com.kla.cardservice.exceptions.CardException;
+import com.kla.cardservice.exceptions.UserException;
 
 
 @Path("/card")
@@ -68,6 +71,11 @@ public class CardResource {
 	public Card registerCard(Card newCard)
 	{
 	
+		String n = "4444444444444444";
+		if(newCard.getCardnumber().equals(n))
+		{
+			throw new CardException("Ekki gilt kortanúmer", Status.BAD_REQUEST);
+		}
 		int card_id = new CardDAO().registerCard(newCard);
 	
 		newCard.setCard_id(card_id);

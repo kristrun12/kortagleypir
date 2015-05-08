@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="com.kla.cardservice.data.Card" project="kortagleypir" 
+    file="/kortagleypir/src/main/java/com/kla/cardservice/data/Card.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="218" width="159" x="54" y="112"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.kla.cardservice.data.Token" project="kortagleypir" 
+    file="/kortagleypir/src/main/java/com/kla/cardservice/data/Token.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="184" width="147" x="279" y="123"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.kla.cardservice.data.Transaction" project="kortagleypir" 
+    file="/kortagleypir/src/main/java/com/kla/cardservice/data/Transaction.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="236" width="151" x="491" y="117"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.kla.cardservice.data.User" project="kortagleypir" 
+    file="/kortagleypir/src/main/java/com/kla/cardservice/data/User.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="127" width="144" x="679" y="128"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
