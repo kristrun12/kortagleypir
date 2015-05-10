@@ -54,7 +54,7 @@ public class TransactionResource {
 	}
 	
 	@POST()
-	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Consumes(MediaType.APPLICATION_JSON )
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Transaction createTransaction(Transaction trans)
 	{
