@@ -30,7 +30,7 @@ public class UserResource {
 	
 	@GET
 	@Path("/all")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<User> getAll()
 	{
 		return new UserDAO().getAllUsers();
@@ -38,8 +38,8 @@ public class UserResource {
 	}
 	
 	@POST()
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public User createUser(User newUser)
 	{
 		String ssn = "2222222222";
@@ -52,6 +52,7 @@ public class UserResource {
 		{
 			throw new UserException("Ekki gildur notandi", Status.BAD_REQUEST);
 		}
+		
 		
 		int userId = new UserDAO().addUser(newUser);
 		newUser.setUsr_id(userId);

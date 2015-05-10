@@ -35,7 +35,7 @@ public class TestAppResource extends JerseyTest {
 		// Create a mock User
 		User user = new User();
 		user.setUsr_id(0);
-		user.setName("Palli");
+		user.setName("Júlli");
 		user.setSsn("12345432");
 		user.setDevice_id(UUID.randomUUID().toString());
 		
@@ -53,7 +53,7 @@ public class TestAppResource extends JerseyTest {
 
 		newCard.setUsr_id(createdUser.getUsr_id());
 		newCard.setCardholder(createdUser.getName());
-		newCard.setCardnumber("4444444444444444");
+		newCard.setCardnumber("12345678987665432");
 		newCard.setCvv("555");
 		newCard.setValidity("15/15");
 		newCard.setDevice_id("6");

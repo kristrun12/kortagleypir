@@ -35,7 +35,7 @@ public class CardResource {
 		
 	@GET
 	@Path("/all")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<Card> getAllCards()
 	{
 		return new CardDAO().getAllCards();
@@ -44,7 +44,7 @@ public class CardResource {
 	
 	@GET()
 	@Path("/balance/{card_id}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.TEXT_PLAIN + ";charset=utf-8")
 	public Integer getBalanceByCardID(@PathParam("card_id")int card_id)
 	{
 		try{
@@ -66,12 +66,11 @@ public class CardResource {
 	}
 	
 	@POST()
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Card registerCard(Card newCard)
 	{
-	
-		String n = "4444444444444444";
+			String n = "4444444444444444";
 		if(newCard.getCardnumber().equals(n))
 		{
 			throw new CardException("Ekki gilt kortanúmer", Status.BAD_REQUEST);

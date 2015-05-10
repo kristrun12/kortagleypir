@@ -31,7 +31,7 @@ public class TransactionResource {
 	}
 	@GET
 	@Path("/all")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<Transaction> getAllTransaction()
 	{
 		return new TransactionDAO().getAllTransactions();
@@ -54,8 +54,8 @@ public class TransactionResource {
 	}
 	
 	@POST()
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Transaction createTransaction(Transaction trans)
 	{
 		//setting the token to string to send to function

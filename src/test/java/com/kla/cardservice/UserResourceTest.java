@@ -40,7 +40,7 @@ public class UserResourceTest extends JerseyTest {
     public void testUserPost() {
     	User user = new User();
     	user.setUsr_id(85);
-    	user.setName("Bella Beenno");
+    	user.setName("Jon");
     	user.setSsn("12345432");
     	user.setDevice_id(UUID.randomUUID().toString());
     	

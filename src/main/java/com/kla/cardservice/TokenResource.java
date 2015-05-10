@@ -28,8 +28,8 @@ public class TokenResource{
 	}
 
 	@POST()
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Token createToken(Token newToken)
 	{		
 			newToken.setTokenitem(UUID.randomUUID().toString());
@@ -43,7 +43,7 @@ public class TokenResource{
 	
 	@GET
 	@Path("/all")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<Token> getAllTokens()
 	{
 		try{
@@ -56,7 +56,7 @@ public class TokenResource{
 	
 	@GET()
 	@Path("/{tokenitem}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Token getToken(@PathParam("tokenitem")String tokenitem)
 	{
 		try{
